@@ -1,0 +1,3 @@
+[submodule "src/ros_odrive"]
+	path = src/ros_odrive
+	url = https://github.com/odriverobotics/ros_odrive.git
