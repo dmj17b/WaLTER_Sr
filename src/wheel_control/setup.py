@@ -11,7 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools','pyserial','rclpy'],
     zip_safe=True,
     maintainer='orl1',
     maintainer_email='dmj17b@fsu.edu',
@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'wheel_control = wheel_control.wheel_control:main',
         ],
     },
 )
