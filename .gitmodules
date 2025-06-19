@@ -1,7 +1,3 @@
 [submodule "src/ros_odrive"]
 	path = src/ros_odrive
 	url = git@github.com:dmj17b/ros_odrive.git
-
-[submodule "src/joystick_ros2"]
-	path = src/joystick_ros2
-	url = git@github.com:dmj17b/joystick_ros2.git
