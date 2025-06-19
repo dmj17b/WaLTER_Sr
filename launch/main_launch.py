@@ -14,5 +14,10 @@ def generate_launch_description():
             executable='joy_node',
             name='joy_node',
 
+        ),
+        Node(
+            package='wheel_control',
+            executable='wheel_control',
+            name='wheel_ctrl',
         )
     ])
