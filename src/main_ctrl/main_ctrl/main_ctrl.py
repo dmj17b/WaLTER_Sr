@@ -9,7 +9,7 @@ from sensor_msgs.msg import Joy
 # Create a node for the main control loop:
 class MainControlLoop(Node):
     def __init__(self):
-        super().__init__('main_ctrl')
+        super().__init__('main_ctrl_node')
         qos_profile=rclpy.qos.QoSProfile(depth=10)
 
         # Wheel control variables:
