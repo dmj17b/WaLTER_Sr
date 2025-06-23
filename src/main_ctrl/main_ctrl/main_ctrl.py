@@ -103,6 +103,8 @@ class MainControlLoop(Node):
     
     # Callback function for joystick messages:
     def joy_callback(self, msg):
+
+        # --------------- Safety Mode Toggle ---------------
         # If start button is pressed, toggle safety mode (with debouncing):
         if msg.buttons[9] == 1 and self.prev_start_button == 0:  # Rising edge detection
             self.safety_on = not self.safety_on
@@ -115,25 +117,33 @@ class MainControlLoop(Node):
                 # Set all ODrive axes to closed loop control mode:
                 for node_name in self.axis_state_clients.keys():
                     self.set_odrive_axis_state(node_name, 8)
-        
         # Update previous button state
         self.prev_start_button = msg.buttons[9]
 
-        right_stick_ud = msg.axes[2]
-        right_stick_lr = msg.axes[3]
+        # --------------- Joystick Control (ODRIVE) ---------------
+
+        right_stick_ud = msg.axes[3]
+        right_stick_lr = msg.axes[2]
 
         # Map joystick inputs to knee velocities:
-        knee_vel = right_stick_ud * self.max_knee_vel
-        self.fr_knee_pub.publish(self.fr_knee_msg)
+        left_knee_vel = self.max_knee_vel * right_stick_ud + self.max_knee_vel * right_stick_lr
+        right_knee_vel = self.max_knee_vel * right_stick_ud - self.max_knee_vel * right_stick_lr
+        # Ensure knee velocities are within limits:
+        left_knee_vel = max(min(left_knee_vel, self.max_knee_vel), -self.max_knee_vel)
+        right_knee_vel = max(min(right_knee_vel, self.max_knee_vel), -self.max_knee_vel)
 
-        fr_knee_des_vel = knee_vel
+        
+
+        # Construct control message to send to ODrive:
+        fr_knee_des_vel = right_knee_vel  # Use right stick for knee control
         self.fr_knee_msg.control_mode = 2
         self.fr_knee_msg.input_mode = 1
         self.fr_knee_msg.input_pos = 0.0  # Not used in velocity
         self.fr_knee_msg.input_vel = fr_knee_des_vel
         self.fr_knee_msg.input_torque = 0.0  # Not used in velocity control
+        self.fr_knee_pub.publish(self.fr_knee_msg)
 
-
+        # ---------------- Joystick Control (Wheels) ---------------
         # Here we would process the joystick command and set wheel speeds accordingly.
         left_stick_ud = msg.axes[0]  # Left stick left/right
         left_stick_lr = msg.axes[1]  # Left stick up/down
@@ -165,6 +175,7 @@ class MainControlLoop(Node):
     def publish_wheel_commands(self):
         self.wheel_publisher_.publish(self.wheel_commands)
         # self.get_logger().info('Publishing: "%s"' % msg)
+
 
 def main():
     rclpy.init()
