@@ -117,4 +117,5 @@ def generate_launch_description():
         fr_knee,
         joy_node,
         main_ctrl_node,
+        wheel_ctrl_node
     ])
