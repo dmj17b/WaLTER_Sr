@@ -68,16 +68,7 @@ class MainControlLoop(Node):
         # If start button is pressed, toggle safety mode (with debouncing):
         if msg.buttons[9] == 1 and self.prev_start_button == 0:  # Rising edge detection
             self.safety_on = not self.safety_on
-            if self.safety_on:
-                self.get_logger().info("Safety mode ON")
-                # Set all ODrive motors to idle state
-                for node_name in self.axis_state_clients.keys():
-                    self.set_odrive_axis_state(node_name, 1)
-            else:
-                self.get_logger().info("Safety mode OFF")
-                # Set all ODrive motors to closed loop control state
-                for node_name in self.axis_state_clients.keys():
-                    self.set_odrive_axis_state(node_name, 8)
+            self.get_logger().info(f"Safety mode {'enabled' if self.safety_on else 'disabled'}")
         # Update previous button state
         self.prev_start_button = msg.buttons[9]
 
