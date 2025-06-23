@@ -115,6 +115,12 @@ def generate_launch_description():
     return LaunchDescription([
         fr_hip,
         fr_knee,
+        fl_knee,
+        fl_hip,
+        rr_hip,
+        rr_knee,
+        rl_hip,
+        rl_knee,
         joy_node,
         main_ctrl_node,
         wheel_ctrl_node

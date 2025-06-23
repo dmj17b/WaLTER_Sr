@@ -18,88 +18,123 @@ class MainControlLoop(Node):
         # General control variables:
         self.safety_on = True
         self.prev_start_button = 0  # Track previous button state for debouncing
+        self.dt = 0.1  # Control loop period in seconds (10ms)
 
         # Wheel control variables:
         self.max_wheel_vel = 16.0
         self.wheel_commands = WheelCommands()
 
         # ODrive control/status variables:
+        self.des_hip_splay = 0.0
+        self.max_knee_vel = 40.0
+        self.max_hip_angle = 1.0  # radians
+        self.min_hip_angle = -0.5  # radians
+        self.max_hip_vel = 0.2  # radians per second
+
         self.fr_hip_pos = 0.0
         self.fr_hip_vel = 0.0
         self.fr_knee_pos = 0.0
         self.fr_knee_vel = 0.0
-        self.max_knee_vel = 5.0
+        self.fl_hip_pos = 0.0
+        self.fl_hip_vel = 0.0
+        self.fl_knee_pos = 0.0
+        self.fl_knee_vel = 0.0
+        self.rr_hip_pos = 0.0
+        self.rr_hip_vel = 0.0
+        self.rr_knee_pos = 0.0
+        self.rr_knee_vel = 0.0
+        self.rl_hip_pos = 0.0
+        self.rl_hip_vel = 0.0
+        self.rl_knee_pos = 0.0
+        self.rl_knee_vel = 0.0
 
         # Create axis state clients for each hip/knee motor:
         self.axis_state_clients = {}
-        odrive_nodes = ['fr_hip', 'fr_knee']#, 'fl_hip', 'fl_knee', 'rr_hip', 'rr_knee', 'rl_hip', 'rl_knee']
+        odrive_nodes = ['fr_hip', 'fr_knee', 'fl_hip', 'fl_knee', 'rr_hip', 'rr_knee', 'rl_hip', 'rl_knee']
         for node_name in odrive_nodes:
             self.axis_state_clients[node_name] = self.create_client(AxisState, f'/{node_name}/request_axis_state')
 
         # ODrive control messages:
         self.fr_hip_msg = ControlMessage()
         self.fr_knee_msg = ControlMessage()
+        self.fl_hip_msg = ControlMessage()
+        self.fl_knee_msg = ControlMessage()
+        self.rr_hip_msg = ControlMessage()
+        self.rr_knee_msg = ControlMessage()
+        self.rl_hip_msg = ControlMessage()
+        self.rl_knee_msg = ControlMessage()
 
         # # ODrive control message publishers:
-        # self.fr_hip_pub = self.create_publisher(ControlMessage, '/fr_hip/control', qos_profile)
+        self.fr_hip_pub = self.create_publisher(ControlMessage, '/fr_hip/control_message', qos_profile)
         self.fr_knee_pub = self.create_publisher(ControlMessage, '/fr_knee/control_message', qos_profile)
+        self.fl_hip_pub = self.create_publisher(ControlMessage, '/fl_hip/control_message', qos_profile)
+        self.fl_knee_pub = self.create_publisher(ControlMessage, '/fl_knee/control_message', qos_profile)
+        self.rr_hip_pub = self.create_publisher(ControlMessage, '/rr_hip/control_message', qos_profile)
+        self.rr_knee_pub = self.create_publisher(ControlMessage, '/rr_knee/control_message', qos_profile)
+        self.rl_hip_pub = self.create_publisher(ControlMessage, '/rl_hip/control_message', qos_profile)
+        self.rl_knee_pub = self.create_publisher(ControlMessage, '/rl_knee/control_message', qos_profile)
+
 
         # Create subscriber for controller status messages:
         self.fr_hip_sub = self.create_subscription(
             msg_type=ControllerStatus,
-            topic='/fr_hip/status',
+            topic='/fr_hip/controller_status',
             callback=self.fr_hip_callback,
             qos_profile=qos_profile
         )
         self.fr_knee_sub = self.create_subscription(
             msg_type=ControllerStatus,
-            topic='/fr_knee/status',
+            topic='/fr_knee/controller_status',
             callback=self.fr_knee_callback,
             qos_profile=qos_profile
         )
+        self.fl_hip_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/fl_hip/controller_status',
+            callback=self.fl_hip_callback,
+            qos_profile=qos_profile
+        )
+        self.fl_knee_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/fl_knee/controller_status',
+            callback=self.fl_knee_callback,
+            qos_profile=qos_profile
+        )
+        self.rr_hip_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/rr_hip/controller_status',
+            callback=self.rr_hip_callback,
+            qos_profile=qos_profile
+        )
+        self.rr_knee_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/rr_knee/controller_status',
+            callback=self.rr_knee_callback,
+            qos_profile=qos_profile
+        )
+        self.rl_hip_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/rl_hip/controller_status',
+            callback=self.rl_hip_callback,
+            qos_profile=qos_profile
+        )
+        self.rl_knee_sub = self.create_subscription(
+            msg_type=ControllerStatus,
+            topic='/rl_knee/controller_status',
+            callback=self.rl_knee_callback,
+            qos_profile=qos_profile
+        )
+
         # Create joystick subscriber:
         self.joystick_subscriber = self.create_subscription(msg_type = Joy, topic = 'joy', callback=self.joy_callback, qos_profile=qos_profile)
         self.wheel_publisher_ = self.create_publisher(WheelCommands, 'wheel_commands', qos_profile)
 
         # Timer to publish wheel commands at a regular interval:
         self.wheel_timer = self.create_timer(0.01, self.publish_wheel_commands)
+        self.odrive_timer = self.create_timer(0.01, self.publish_odrive_commands)
     
 
-    # Callbacks for ODrive status messages:
-    # These will update the ACTUAL position and velocity of the hip/knee motors:
-    def fr_hip_callback(self, msg):
-        self.fr_hip_pos = msg.position
-        self.fr_hip_vel = msg.velocity
-    
-    def fr_knee_callback(self, msg):
-        self.fr_knee_pos = msg.position
-        self.fr_knee_vel = msg.velocity
 
-
-    # Function to set ODrive axis state:
-    def set_odrive_axis_state(self, node_name, state):
-        if node_name not in self.axis_state_clients:
-            self.get_logger().error(f"No client for node: {node_name}")
-            return
-            
-        client = self.axis_state_clients[node_name]
-        if not client.service_is_ready():
-            self.get_logger().warn(f"Service not ready for {node_name}")
-            return
-            
-        request = AxisState.Request()
-        request.axis_requested_state = state
-        
-        future = client.call_async(request)
-        future.add_done_callback(lambda f: self.service_response_callback(f, node_name))
-
-    # Callback function for service responses:
-    def service_response_callback(self, future, node_name):
-        try:
-            response = future.result()
-            self.get_logger().info(f"Service call to {node_name} completed")
-        except Exception as e:
-            self.get_logger().error(f"Service call to {node_name} failed: {e}")
     
     # Callback function for joystick messages:
     def joy_callback(self, msg):
@@ -126,22 +161,80 @@ class MainControlLoop(Node):
         right_stick_lr = msg.axes[2]
 
         # Map joystick inputs to knee velocities:
-        left_knee_vel = self.max_knee_vel * right_stick_ud + self.max_knee_vel * right_stick_lr
-        right_knee_vel = self.max_knee_vel * right_stick_ud - self.max_knee_vel * right_stick_lr
+        right_knee_vel = self.max_knee_vel * right_stick_ud + self.max_knee_vel * right_stick_lr
+        left_knee_vel = self.max_knee_vel * right_stick_ud - self.max_knee_vel * right_stick_lr
         # Ensure knee velocities are within limits:
         left_knee_vel = max(min(left_knee_vel, self.max_knee_vel), -self.max_knee_vel)
         right_knee_vel = max(min(right_knee_vel, self.max_knee_vel), -self.max_knee_vel)
 
+        fr_knee_des_pos = self.fr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
+        fl_knee_des_pos = self.fl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
+        rr_knee_des_pos = self.rr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
+        rl_knee_des_pos = self.rl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
+
+        # Map dpad inputs to hip velocities:
+        dpad_ud = msg.axes[5]
+        dpad_lr = msg.axes[4]
+        self.des_hip_splay = self.des_hip_splay + dpad_ud * self.max_hip_vel * self.dt  # Adjust splay angle based on dpad input
+        self.des_hip_splay = max(min(self.des_hip_splay, self.max_hip_angle), self.min_hip_angle)  # Clamp splay angle
+
+
+
         
 
-        # Construct control message to send to ODrive:
-        fr_knee_des_vel = right_knee_vel  # Use right stick for knee control
-        self.fr_knee_msg.control_mode = 2
-        self.fr_knee_msg.input_mode = 1
-        self.fr_knee_msg.input_pos = 0.0  # Not used in velocity
-        self.fr_knee_msg.input_vel = fr_knee_des_vel
+        # Construct control messages:
+        # Front Right Knee:
+        self.fr_knee_msg.control_mode = 3
+        self.fr_knee_msg.input_mode = 5
+        self.fr_knee_msg.input_pos = fr_knee_des_pos  # Not used in velocity
+        self.fr_knee_msg.input_vel = right_knee_vel
         self.fr_knee_msg.input_torque = 0.0  # Not used in velocity control
-        self.fr_knee_pub.publish(self.fr_knee_msg)
+        # Front Left Knee:
+        self.fl_knee_msg.control_mode = 3
+        self.fl_knee_msg.input_mode = 5
+        self.fl_knee_msg.input_pos = fl_knee_des_pos  # Not used in velocity
+        self.fl_knee_msg.input_vel = right_knee_vel
+        self.fl_knee_msg.input_torque = 0.0  # Not used in velocity control
+        # Back Right Knee:
+        self.rr_knee_msg.control_mode = 3
+        self.rr_knee_msg.input_mode = 5
+        self.rr_knee_msg.input_pos = rr_knee_des_pos  # Not used in velocity
+        self.rr_knee_msg.input_vel = right_knee_vel
+        self.rr_knee_msg.input_torque = 0.0  # Not used in velocity control
+        # Back Left Knee:
+        self.rl_knee_msg.control_mode = 3
+        self.rl_knee_msg.input_mode = 5
+        self.rl_knee_msg.input_pos = rl_knee_des_pos  # Not used in velocity
+        self.rl_knee_msg.input_vel = left_knee_vel
+        self.rl_knee_msg.input_torque = 0.0  # Not used in velocity control
+
+
+        # Front Right Hip:
+        self.fr_hip_msg.control_mode = 3
+        self.fr_hip_msg.input_mode = 5
+        self.fr_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
+        self.fr_hip_msg.input_vel = 0.0  # Not used
+        self.fr_hip_msg.input_torque = 0.0  # Not used in velocity control
+        # Front Left Hip:
+        self.fl_hip_msg.control_mode = 3
+        self.fl_hip_msg.input_mode = 5
+        self.fl_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
+        self.fl_hip_msg.input_vel = 0.0  # Not used
+        self.fl_hip_msg.input_torque = 0.0  # Not used in velocity control
+        # Back Right Hip:
+        self.rr_hip_msg.control_mode = 3
+        self.rr_hip_msg.input_mode = 5
+        self.rr_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
+        self.rr_hip_msg.input_vel = 0.0  # Not used
+        self.rr_hip_msg.input_torque = 0.0
+        # Back Left Hip:
+        self.rl_hip_msg.control_mode = 3
+        self.rl_hip_msg.input_mode = 5
+        self.rl_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
+        self.rl_hip_msg.input_vel = 0.0  # Not used
+        self.rl_hip_msg.input_torque = 0.0  # Not used
+
+
 
         # ---------------- Joystick Control (Wheels) ---------------
         # Here we would process the joystick command and set wheel speeds accordingly.
@@ -171,10 +264,74 @@ class MainControlLoop(Node):
         self.wheel_commands.m7_value = right_wheel_speed
 
 
-
+    # Publish the wheel commands to the wheel command topic:
     def publish_wheel_commands(self):
         self.wheel_publisher_.publish(self.wheel_commands)
-        # self.get_logger().info('Publishing: "%s"' % msg)
+
+
+    # Callbacks for ODrive status messages:
+    # These will update the ACTUAL position and velocity of the hip/knee motors:
+    def fr_hip_callback(self, msg):
+        self.fr_hip_pos = msg.pos_estimate
+        self.fr_hip_vel = msg.vel_estimate
+    def fr_knee_callback(self, msg):
+        self.fr_knee_pos = msg.pos_estimate
+        self.fr_knee_vel = msg.vel_estimate
+    def fl_hip_callback(self, msg):
+        self.fl_hip_pos = msg.pos_estimate
+        self.fl_hip_vel = msg.vel_estimate
+    def fl_knee_callback(self, msg):
+        self.fl_knee_pos = msg.pos_estimate
+        self.fl_knee_vel = msg.vel_estimate
+    def rr_hip_callback(self, msg):
+        self.rr_hip_pos = msg.pos_estimate
+        self.rr_hip_vel = msg.vel_estimate  
+    def rr_knee_callback(self, msg):
+        self.rr_knee_pos = msg.pos_estimate
+        self.rr_knee_vel = msg.vel_estimate
+    def rl_hip_callback(self, msg):
+        self.rl_hip_pos = msg.pos_estimate
+        self.rl_hip_vel = msg.vel_estimate
+    def rl_knee_callback(self, msg):
+        self.rl_knee_pos = msg.pos_estimate
+        self.rl_knee_vel = msg.vel_estimate
+
+    def publish_odrive_commands(self):
+        self.fr_knee_pub.publish(self.fr_knee_msg)
+        self.fr_hip_pub.publish(self.fr_hip_msg)
+        self.fl_hip_pub.publish(self.fl_hip_msg)
+        self.fl_knee_pub.publish(self.fl_knee_msg)
+        self.rr_hip_pub.publish(self.rr_hip_msg)
+        self.rr_knee_pub.publish(self.rr_knee_msg)
+        self.rl_hip_pub.publish(self.rl_hip_msg)
+        self.rl_knee_pub.publish(self.rl_knee_msg)
+
+
+
+    # Function to set ODrive axis state:
+    def set_odrive_axis_state(self, node_name, state):
+        if node_name not in self.axis_state_clients:
+            self.get_logger().error(f"No client for node: {node_name}")
+            return
+            
+        client = self.axis_state_clients[node_name]
+        if not client.service_is_ready():
+            self.get_logger().warn(f"Service not ready for {node_name}")
+            return
+            
+        request = AxisState.Request()
+        request.axis_requested_state = state
+        
+        future = client.call_async(request)
+        future.add_done_callback(lambda f: self.service_response_callback(f, node_name))
+
+    # Callback function for service responses:
+    def service_response_callback(self, future, node_name):
+        try:
+            response = future.result()
+            self.get_logger().info(f"Service call to {node_name} completed")
+        except Exception as e:
+            self.get_logger().error(f"Service call to {node_name} failed: {e}")
 
 
 def main():
