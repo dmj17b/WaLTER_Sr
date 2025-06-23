@@ -5,30 +5,23 @@ def generate_launch_description():
     # Declare launch arguments
 
     # Create nodes for each ODrive motor
-    fr_hip = Node(
+    fr_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'fr_hip',
+        name = 'fr_knee',
+        namespace='fr_knee',
         parameters = [{
             'node_id' : 0,
             'interface' : 'can1',
         }] 
     )
-    fr_knee = Node(
+    fr_hip = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'fr_knee',
+        name = 'fr_hip',
+        namespace='fr_hip',
         parameters = [{
             'node_id' : 1,
-            'interface' : 'can1',
-        }] 
-    )
-    fl_hip = Node(
-        package='odrive_can',
-        executable='odrive_can_node',
-        name = 'fl_hip',
-        parameters = [{
-            'node_id' : 2,
             'interface' : 'can1',
         }] 
     )
@@ -36,45 +29,60 @@ def generate_launch_description():
         package='odrive_can',
         executable='odrive_can_node',
         name = 'fl_knee',
+        namespace='fl_knee',
+        parameters = [{
+            'node_id' : 2,
+            'interface' : 'can1',
+        }] 
+    )
+    fl_hip = Node(
+        package='odrive_can',
+        executable='odrive_can_node',
+        name = 'fl_hip',
+        namespace='fl_hip',
         parameters = [{
             'node_id' : 3,
             'interface' : 'can1',
         }]
     )
-    rr_hip = Node(
+    rl_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'rr_hip',
+        name = 'rl_knee',
+        namespace='rl_knee',
         parameters = [{
             'node_id' : 4,
-            'interface' : 'can1',
+            'interface' : 'can0',
         }] 
-    )
-    rr_knee = Node(
-        package='odrive_can',
-        executable='odrive_can_node',
-        name = 'rr_knee',
-        parameters = [{
-            'node_id' : 5,
-            'interface' : 'can1',
-        }]
     )
     rl_hip = Node(
         package='odrive_can',
         executable='odrive_can_node',
         name = 'rl_hip',
+        namespace='rl_hip',
         parameters = [{
-            'node_id' : 6,
-            'interface' : 'can1',
-        }] 
+            'node_id' : 5,
+            'interface' : 'can0',
+        }]
     )
-    rl_knee = Node(
+    rr_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'rl_knee',
+        name = 'rr_knee',
+        namespace='rr_knee',
+        parameters = [{
+            'node_id' : 6,
+            'interface' : 'can0',
+        }] 
+    )
+    rr_hip = Node(
+        package='odrive_can',
+        executable='odrive_can_node',
+        name = 'rr_hip',
+        namespace='rr_hip',
         parameters = [{
             'node_id' : 7,
-            'interface' : 'can1',
+            'interface' : 'can0',
         }] 
     )
 
@@ -105,7 +113,8 @@ def generate_launch_description():
     )
     
     return LaunchDescription([
+        fr_hip,
+        fr_knee,
         joy_node,
-        wheel_ctrl_node,
         main_ctrl_node,
     ])

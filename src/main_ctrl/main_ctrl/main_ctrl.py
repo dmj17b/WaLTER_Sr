@@ -15,17 +15,20 @@ class MainControlLoop(Node):
         super().__init__('main_ctrl_node')
         qos_profile=rclpy.qos.QoSProfile(depth=10)
 
+        # General control variables:
+        self.safety_on = True
+        self.prev_start_button = 0  # Track previous button state for debouncing
         # Wheel control variables:
-        self.max_wheel_vel = 8.0
+        self.max_wheel_vel = 16.0
         self.wheel_commands = WheelCommands()
 
         # ODrive stuff:
 
         # Create axis state clients for each hip/knee motor:
-        # self.axis_state_client = self.create_client(AxisState, 'request_axis_state',)    # Service to set ODrive axis state
-
-        # Timer to update ODrive commands at a regular interval:
-        self.odrive_timer = self.create_timer(0.01, self.set_odrive_axis_state, 0)  
+        self.axis_state_clients = {}
+        odrive_nodes = ['fr_hip', 'fr_knee']#, 'fl_hip', 'fl_knee', 'rr_hip', 'rr_knee', 'rl_hip', 'rl_knee']
+        for node_name in odrive_nodes:
+            self.axis_state_clients[node_name] = self.create_client(AxisState, f'/{node_name}/request_axis_state')
 
         # Create joystick subscriber:
         self.joystick_subscriber = self.create_subscription(msg_type = Joy, topic = 'joy', callback=self.joy_callback, qos_profile=qos_profile)
@@ -36,12 +39,39 @@ class MainControlLoop(Node):
         
 
     # Function to set ODrive axis state:
-    def set_odrive_axis_state(self, axis, state):
+    def set_odrive_axis_state(self, node_name, state):
+        if node_name not in self.axis_state_clients:
+            self.get_logger().error(f"No client for node: {node_name}")
+            return
+            
+        client = self.axis_state_clients[node_name]
+        if not client.service_is_ready():
+            self.get_logger().warn(f"Service not ready for {node_name}")
+            return
+            
         request = AxisState.Request()
         request.axis_requested_state = state
+        
+        future = client.call_async(request)
+        future.add_done_callback(lambda f: self.service_response_callback(f, node_name))
+
+    # Callback function for service responses:
+    def service_response_callback(self, future, node_name):
+        try:
+            response = future.result()
+            self.get_logger().info(f"Service call to {node_name} completed")
+        except Exception as e:
+            self.get_logger().error(f"Service call to {node_name} failed: {e}")
     
     # Callback function for joystick messages:
     def joy_callback(self, msg):
+        # If start button is pressed, toggle safety mode (with debouncing):
+        if msg.buttons[9] == 1 and self.prev_start_button == 0:  # Rising edge detection
+            self.safety_on = not self.safety_on
+            self.get_logger().info(f"Safety mode {'enabled' if self.safety_on else 'disabled'}")
+        # Update previous button state
+        self.prev_start_button = msg.buttons[9]
+
 
         # Here we would process the joystick command and set wheel speeds accordingly.
         left_stick_ud = msg.axes[0]  # Left stick left/right
@@ -65,8 +95,8 @@ class MainControlLoop(Node):
         self.wheel_commands.m2_value = right_wheel_speed
         self.wheel_commands.m3_value = right_wheel_speed
         self.wheel_commands.m4_value = left_wheel_speed
-        self.wheel_commands.m5_value = right_wheel_speed
-        self.wheel_commands.m6_value = left_wheel_speed
+        self.wheel_commands.m5_value = left_wheel_speed
+        self.wheel_commands.m6_value = right_wheel_speed
         self.wheel_commands.m7_value = right_wheel_speed
 
 
