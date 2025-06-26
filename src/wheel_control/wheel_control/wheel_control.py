@@ -32,10 +32,12 @@ class WheelControlNode(Node):
         self.send_serial_command(1, msg.m1_command, msg.m1_value)
         self.send_serial_command(2, msg.m2_command, msg.m2_value)
         self.send_serial_command(3, msg.m3_command, msg.m3_value)
+
         self.send_serial_command(4, msg.m4_command, msg.m4_value)
         self.send_serial_command(5, msg.m5_command, msg.m5_value)
         self.send_serial_command(6, msg.m6_command, msg.m6_value)
         self.send_serial_command(7, msg.m7_command, msg.m7_value)
+        # self.get_logger().info(f'Received wheel commands: {msg}')
 
     def send_serial_command(self, motorId, command, value):
         """Send a command to the Teensy via serial."""

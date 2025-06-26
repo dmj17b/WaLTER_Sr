@@ -121,7 +121,5 @@ def generate_launch_description():
         rr_knee,
         rl_hip,
         rl_knee,
-        joy_node,
-        main_ctrl_node,
-        wheel_ctrl_node
+
     ])

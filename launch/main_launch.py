@@ -1,34 +1,28 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import TimerAction
 
 def generate_launch_description():
     # Declare launch arguments
 
     # Create nodes for each ODrive motor
-    fr_hip = Node(
+    fr_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'fr_hip',
+        name = 'fr_knee',
+        namespace='fr_knee',
         parameters = [{
             'node_id' : 0,
             'interface' : 'can1',
         }] 
     )
-    fr_knee = Node(
+    fr_hip = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'fr_knee',
+        name = 'fr_hip',
+        namespace='fr_hip',
         parameters = [{
             'node_id' : 1,
-            'interface' : 'can1',
-        }] 
-    )
-    fl_hip = Node(
-        package='odrive_can',
-        executable='odrive_can_node',
-        name = 'fl_hip',
-        parameters = [{
-            'node_id' : 2,
             'interface' : 'can1',
         }] 
     )
@@ -36,48 +30,62 @@ def generate_launch_description():
         package='odrive_can',
         executable='odrive_can_node',
         name = 'fl_knee',
+        namespace='fl_knee',
+        parameters = [{
+            'node_id' : 2,
+            'interface' : 'can1',
+        }] 
+    )
+    fl_hip = Node(
+        package='odrive_can',
+        executable='odrive_can_node',
+        name = 'fl_hip',
+        namespace='fl_hip',
         parameters = [{
             'node_id' : 3,
             'interface' : 'can1',
         }]
     )
-    rr_hip = Node(
+    rl_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'rr_hip',
+        name = 'rl_knee',
+        namespace='rl_knee',
         parameters = [{
             'node_id' : 4,
-            'interface' : 'can1',
+            'interface' : 'can0',
         }] 
-    )
-    rr_knee = Node(
-        package='odrive_can',
-        executable='odrive_can_node',
-        name = 'rr_knee',
-        parameters = [{
-            'node_id' : 5,
-            'interface' : 'can1',
-        }]
     )
     rl_hip = Node(
         package='odrive_can',
         executable='odrive_can_node',
         name = 'rl_hip',
+        namespace='rl_hip',
         parameters = [{
-            'node_id' : 6,
-            'interface' : 'can1',
-        }] 
+            'node_id' : 5,
+            'interface' : 'can0',
+        }]
     )
-    rl_knee = Node(
+    rr_knee = Node(
         package='odrive_can',
         executable='odrive_can_node',
-        name = 'rl_knee',
+        name = 'rr_knee',
+        namespace='rr_knee',
         parameters = [{
-            'node_id' : 7,
-            'interface' : 'can1',
+            'node_id' : 6,
+            'interface' : 'can0',
         }] 
     )
-
+    rr_hip = Node(
+        package='odrive_can',
+        executable='odrive_can_node',
+        name = 'rr_hip',
+        namespace='rr_hip',
+        parameters = [{
+            'node_id' : 7,
+            'interface' : 'can0',
+        }] 
+    )
     # Main control node 
     # This node handles the main control loop, reading joystick inputs and mappng them to hip/knee/wheel commands
     main_ctrl_node= Node(
@@ -93,6 +101,21 @@ def generate_launch_description():
         package='joy',
         executable='joy_node',
         name='joy_node',
+        parameters=[{
+            'deadzone': 0.1,
+            'dev': '/dev/input/js0',
+            'coalesce_interval': 0.05,
+        }]
+
+    )
+    delayed_main_ctrl = TimerAction(
+        period=5.0,
+        actions=[main_ctrl_node]
+    )
+
+    delayed_joy_node = TimerAction(
+        period = 5.0,
+        actions=[joy_node]
 
     )
 
@@ -107,5 +130,14 @@ def generate_launch_description():
     return LaunchDescription([
         joy_node,
         wheel_ctrl_node,
+        fr_hip,
+        fr_knee,
+        fl_hip,
+        fl_knee,
+        rr_hip,
+        rr_knee,
+        rl_hip,
+        rl_knee,
         main_ctrl_node,
+
     ])
