@@ -25,19 +25,19 @@ class MainControlLoop(Node):
         # Wheel control variables:
         self.max_wheel_vel = 25.0
         self.wheel_commands = WheelCommands()
-        self.hip_input_mode = 5
-        self.knee_input_mode = 5
+        self.hip_input_mode = 3
+        self.knee_input_mode = 3
 
         # Mechanism:
-        self.knee_gear_ratio = 6.0*30.0/19.0  # Gear ratio for knee motors (6:1 planetary * 30:19 pulley)
+        self.knee_gear_ratio = 6.0*30.0/15.0  # Gear ratio for knee motors (6:1 planetary * 30:19 pulley)
         self.hip_gear_ratio = 6.0 # Gear ratio for hip motors (6:1 planetary)
 
         # ODrive control/status variables:
         self.des_hip_splay = 0.0
-        self.max_knee_vel = 40.0
+        self.max_knee_vel = 20.0
         self.max_hip_angle = 1.0  # radians
         self.min_hip_angle = -0.5  # radians
-        self.max_hip_vel = 0.2  # radians per second
+        self.max_hip_vel = 0.5  # radians per second
 
         self.fr_hip_pos = 0.0
         self.fr_hip_vel = 0.0
@@ -199,7 +199,7 @@ class MainControlLoop(Node):
         self.get_logger().info("ODrive control message publishers initialized")
 
         # Create a timer to publish ODrive commands at a regular interval:
-        self.odrive_timer = self.create_timer(0.1, self.publish_odrive_commands)
+        self.odrive_timer = self.create_timer(0.01, self.publish_odrive_commands)
         self.get_logger().info("ODrive command publisher initialized")
         self.odrive_initialized = True
 
@@ -288,9 +288,9 @@ class MainControlLoop(Node):
 
             # ---------------- ODrive Control Messages ----------------
             # Debug hip/knee coupling:
-            self.get_logger().info(f"RR_Hip Angle: {self.rr_hip_pos}, RR_Knee Angle: {self.rr_knee_pos}")
-            compensation_angle = self.rr_hip_pos* self.hip_gear_ratio / self.knee_gear_ratio  # Compensation angle for knee based on hip position
-            self.get_logger().info(f"Compensation angle: {compensation_angle}")
+            # self.get_logger().info(f"RR_Hip Angle: {self.rr_hip_pos}, RR_Knee Angle: {self.rr_knee_pos}")
+            # compensation_angle = self.rr_hip_pos* self.hip_gear_ratio / self.knee_gear_ratio  # Compensation angle for knee based on hip position
+            # self.get_logger().info(f"Compensation angle: {compensation_angle}")
             # Construct ODrive control messages:
             # Front Right Knee:
             self.fr_knee_msg.control_mode = 3

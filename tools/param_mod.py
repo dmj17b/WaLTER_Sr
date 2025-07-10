@@ -49,6 +49,7 @@ class ODriveModifier:
         self.path_vel_gain = 'axis0.controller.config.vel_gain'
         self.path_vi_gain = 'axis0.controller.config.vel_integrator_gain'
         self.path_pos_gain = 'axis0.controller.config.pos_gain'
+        self.trap_traj_vel_limit = 'axis0.trap_traj.config.vel_limit'
 
 
     # Function to check ODrive version against endpoint data
@@ -137,18 +138,82 @@ fl_knee = ODriveModifier(node_id=2, channel="can1")
 rl_knee = ODriveModifier(node_id=4, channel="can0")
 rr_knee = ODriveModifier(node_id=6, channel="can0")
 
+fr_hip = ODriveModifier(node_id=1, channel="can1")
+fl_hip = ODriveModifier(node_id=3, channel="can1")
+rl_hip = ODriveModifier(node_id=5, channel="can0")
+rr_hip = ODriveModifier(node_id=7, channel="can0")
+
+
+''' Update Knee Parameters'''
 for knee in [fr_knee, fl_knee, rl_knee, rr_knee]:
-    knee.check_version()
-    knee.write(knee.path_vel_gain, vel_gain)  # Write vel_gain
-    knee.write(knee.path_vi_gain, vi_gain)  # Write vel_integrator_gain
-    knee.write(knee.path_pos_gain, pos_gain)  # Write pos_gain
-    knee.write('axis0.controller.config.inertia', 0.0)  # Set inertia
-    knee.write("axis0.config.motor.current_soft_max", current_soft_max)  # Set current soft max
-    print(f"Updated {knee.node_id} with pos_gain={pos_gain}, vel_gain={vel_gain}, vi_gain={vi_gain}")
-    print(f"Soft torque min: {knee.read('axis0.config.torque_soft_min')}")
-    print(f"Soft torque max: {knee.read('axis0.config.torque_soft_max')}")
-    print(f"Current soft min: {knee.read('axis0.config.motor.current_soft_max')}")
-    print(f"Current hard max: {knee.read('axis0.config.motor.current_hard_max')}")
-    print(f"Inertia: {knee.read('axis0.controller.config.inertia')}")
+    knee.check_version()  # Check ODrive version
+
+    ''' Check CAN communication rates'''
+    print(f"Node ID: {knee.node_id}")
+    print(f"Version MSG Rate: {knee.read('axis0.config.can.version_msg_rate_ms')}")
+    print(f"Heartbeat Rate: {knee.read('axis0.config.can.heartbeat_msg_rate_ms')}")
+    print(f"Encoder msg rate: {knee.read('axis0.config.can.encoder_msg_rate_ms')}")
+    print(f"IQ MSG Rate: {knee.read('axis0.config.can.iq_msg_rate_ms')}")
+    print(f"Error MSG Rate: {knee.read('axis0.config.can.error_msg_rate_ms')}")
+    print(f"Temp MSG Rate: {knee.read('axis0.config.can.temperature_msg_rate_ms')}")
+    print(f"Bus Voltage MSG Rate: {knee.read('axis0.config.can.bus_voltage_msg_rate_ms')}")
+    print(f"Torques MSG Rate: {knee.read('axis0.config.can.torques_msg_rate_ms')}")
+    print(f"Power MSG Rate: {knee.read('axis0.config.can.powers_msg_rate_ms')}")
+    print("\n")
+
+    ''' Change communication rates'''  
+    knee.write('axis0.config.can.heartbeat_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.encoder_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.iq_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.error_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.temperature_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.bus_voltage_msg_rate_ms', 10)  
+    knee.write('axis0.config.can.torques_msg_rate_ms', 10) 
+    knee.write('axis0.config.can.powers_msg_rate_ms', 0) 
+    print(f"Updated communication rates for Node ID: {knee.node_id}")
+
+
+
+    # knee.check_version()
+    # knee.write(knee.path_vel_gain, vel_gain)  # Write vel_gain
+    # knee.write(knee.path_vi_gain, vi_gain)  # Write vel_integrator_gain
+    # knee.write(knee.path_pos_gain, pos_gain)  # Write pos_gain
+    # knee.write('axis0.controller.config.inertia', 0.0)  # Set inertia
+    # knee.write("axis0.config.motor.current_soft_max", current_soft_max)  # Set current soft max
+    # print(f"Updated {knee.node_id} with pos_gain={pos_gain}, vel_gain={vel_gain}, vi_gain={vi_gain}")
+    # print(f"Soft torque min: {knee.read('axis0.config.torque_soft_min')}")
+    # print(f"Soft torque max: {knee.read('axis0.config.torque_soft_max')}")
+    # print(f"Current soft min: {knee.read('axis0.config.motor.current_soft_max')}")
+    # print(f"Current hard max: {knee.read('axis0.config.motor.current_hard_max')}")
+    # print(f"Inertia: {knee.read('axis0.controller.config.inertia')}")
     knee.save_config()  # Save configuration to flash
 
+''' Update Hip Parameters'''
+
+for hip in [fr_hip, fl_hip, rl_hip, rr_hip]:
+    hip.check_version()  # Check ODrive version
+
+    ''' Check CAN communication rates'''
+    print(f"Node ID: {hip.node_id}")
+    print(f"Version MSG Rate: {hip.read('axis0.config.can.version_msg_rate_ms')}")
+    print(f"Heartbeat Rate: {hip.read('axis0.config.can.heartbeat_msg_rate_ms')}")
+    print(f"Encoder msg rate: {hip.read('axis0.config.can.encoder_msg_rate_ms')}")
+    print(f"IQ MSG Rate: {hip.read('axis0.config.can.iq_msg_rate_ms')}")
+    print(f"Error MSG Rate: {hip.read('axis0.config.can.error_msg_rate_ms')}")
+    print(f"Temp MSG Rate: {hip.read('axis0.config.can.temperature_msg_rate_ms')}")
+    print(f"Bus Voltage MSG Rate: {hip.read('axis0.config.can.bus_voltage_msg_rate_ms')}")
+    print(f"Torques MSG Rate: {hip.read('axis0.config.can.torques_msg_rate_ms')}")
+    print(f"Power MSG Rate: {hip.read('axis0.config.can.powers_msg_rate_ms')}")
+    print("\n")
+
+    ''' Change communication rates'''  
+    hip.write('axis0.config.can.heartbeat_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.encoder_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.iq_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.error_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.temperature_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.bus_voltage_msg_rate_ms', 10)  
+    hip.write('axis0.config.can.torques_msg_rate_ms', 10) 
+    hip.write('axis0.config.can.powers_msg_rate_ms', 0) 
+    print(f"Updated communication rates for Node ID: {hip.node_id}")
+    hip.save_config()  # Save configuration to flash
