@@ -6,6 +6,7 @@ from sensor_msgs.msg import Joy
 from odrive_can.msg import ODriveStatus, ControlMessage, ControllerStatus
 from odrive_can.srv import AxisState
 import time
+import numpy as np
 
 '''This is the main control loop for the robot. Here is where we will subscribe to joystick commands, process outputs, and then publish wheel/leg commands.'''
 
@@ -22,10 +23,14 @@ class MainControlLoop(Node):
         self.dt = 0.1  # Control loop period in seconds (10ms)
 
         # Wheel control variables:
-        self.max_wheel_vel = 16.0
+        self.max_wheel_vel = 25.0
         self.wheel_commands = WheelCommands()
         self.hip_input_mode = 5
         self.knee_input_mode = 5
+
+        # Mechanism:
+        self.knee_gear_ratio = 6.0*30.0/19.0  # Gear ratio for knee motors (6:1 planetary * 30:19 pulley)
+        self.hip_gear_ratio = 6.0 # Gear ratio for hip motors (6:1 planetary)
 
         # ODrive control/status variables:
         self.des_hip_splay = 0.0
@@ -184,21 +189,13 @@ class MainControlLoop(Node):
 
         # ODrive control message publishers:
         self.fr_hip_pub = self.create_publisher(ControlMessage, '/fr_hip/control_message', qos_profile)
-        time.sleep(0.1)
         self.fr_knee_pub = self.create_publisher(ControlMessage, '/fr_knee/control_message', qos_profile)
-        time.sleep(0.1)
         self.fl_hip_pub = self.create_publisher(ControlMessage, '/fl_hip/control_message', qos_profile)
-        time.sleep(0.1)
         self.fl_knee_pub = self.create_publisher(ControlMessage, '/fl_knee/control_message', qos_profile)
-        time.sleep(0.1)
         self.rr_hip_pub = self.create_publisher(ControlMessage, '/rr_hip/control_message', qos_profile)
-        time.sleep(0.1)
         self.rr_knee_pub = self.create_publisher(ControlMessage, '/rr_knee/control_message', qos_profile)
-        time.sleep(0.1)
         self.rl_hip_pub = self.create_publisher(ControlMessage, '/rl_hip/control_message', qos_profile)
-        time.sleep(0.1)
         self.rl_knee_pub = self.create_publisher(ControlMessage, '/rl_knee/control_message', qos_profile)
-        time.sleep(0.1)
         self.get_logger().info("ODrive control message publishers initialized")
 
         # Create a timer to publish ODrive commands at a regular interval:
@@ -210,11 +207,16 @@ class MainControlLoop(Node):
 
 
     # Callback function for joystick messages:
-    def joy_callback(self, msg):
+    '''-------------- Essentially our main control loop for now--------------'''
 
+    def joy_callback(self, msg):
+        # Check if ODrive is initialized before processing joystick commands. 
+        # Need to make sure ODrives are actually running before we try to control them.
         if not self.odrive_initialized:
             self.get_logger().warn("ODrive not initialized yet, skipping joystick processing")
             return
+        
+
         # --------------- Safety Mode Toggle ---------------
         # If start button is pressed, toggle safety mode (with debouncing):
         if msg.buttons[9] == 1 and self.prev_start_button == 0:  # Rising edge detection
@@ -232,90 +234,128 @@ class MainControlLoop(Node):
         self.prev_start_button = msg.buttons[9]
 
         # --------------- Joystick Control (ODRIVE) ---------------
+        # IF SAFETY IS OFF, CONTROL:
+        if not self.safety_on:
 
-        right_stick_ud = msg.axes[3]
-        right_stick_lr = msg.axes[2]
-
-        # Map joystick inputs to knee velocities:
-        right_knee_vel = self.max_knee_vel * right_stick_ud + self.max_knee_vel * right_stick_lr
-        left_knee_vel = self.max_knee_vel * right_stick_ud - self.max_knee_vel * right_stick_lr
-        
-        # Ensure knee velocities are within limits:
-        left_knee_vel = max(min(left_knee_vel, self.max_knee_vel), -self.max_knee_vel)
-        right_knee_vel = max(min(right_knee_vel, self.max_knee_vel), -self.max_knee_vel)
-
-        fr_knee_des_pos = self.fr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
-        fl_knee_des_pos = self.fl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
-        rr_knee_des_pos = self.rr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
-        rl_knee_des_pos = self.rl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
-
-        # Map dpad inputs to hip velocities:
-        dpad_ud = msg.axes[5]
-        dpad_lr = msg.axes[4]
-        self.des_hip_splay = self.des_hip_splay + dpad_ud * self.max_hip_vel * self.dt  # Adjust splay angle based on dpad input
-        self.des_hip_splay = max(min(self.des_hip_splay, self.max_hip_angle), self.min_hip_angle)  # Clamp splay angle
-        
-
-        # Construct control messages:
-        # Front Right Knee:
-        self.fr_knee_msg.control_mode = 3
-        self.fr_knee_msg.input_mode = self.knee_input_mode
-        self.fr_knee_msg.input_pos = fr_knee_des_pos  # Not used in velocity
-        self.fr_knee_msg.input_vel = right_knee_vel
-        self.fr_knee_msg.input_torque = 0.0  # Not used in velocity control
-        # Front Left Knee:
-        self.fl_knee_msg.control_mode = 3
-        self.fl_knee_msg.input_mode = self.knee_input_mode
-        self.fl_knee_msg.input_pos = fl_knee_des_pos  # Not used in velocity
-        self.fl_knee_msg.input_vel = right_knee_vel
-        self.fl_knee_msg.input_torque = 0.0  # Not used in velocity control
-        # Back Right Knee:
-        self.rr_knee_msg.control_mode = 3
-        self.rr_knee_msg.input_mode = self.knee_input_mode
-        self.rr_knee_msg.input_pos = rr_knee_des_pos  # Not used in velocity
-        self.rr_knee_msg.input_vel = right_knee_vel
-        self.rr_knee_msg.input_torque = 0.0  # Not used in velocity control
-        # Back Left Knee:
-        self.rl_knee_msg.control_mode = 3
-        self.rl_knee_msg.input_mode = self.knee_input_mode
-        self.rl_knee_msg.input_pos = rl_knee_des_pos  # Not used in velocity
-        self.rl_knee_msg.input_vel = left_knee_vel
-        self.rl_knee_msg.input_torque = 0.0  # Not used in velocity control
-        # Front Right Hip:
-        self.fr_hip_msg.control_mode = 3
-        self.fr_hip_msg.input_mode = self.hip_input_mode
-        self.fr_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
-        self.fr_hip_msg.input_vel = 0.0  # Not used
-        self.fr_hip_msg.input_torque = 0.0  # Not used in velocity control
-        # Front Left Hip:
-        self.fl_hip_msg.control_mode = 3
-        self.fl_hip_msg.input_mode = self.hip_input_mode
-        self.fl_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
-        self.fl_hip_msg.input_vel = 0.0  # Not used
-        self.fl_hip_msg.input_torque = 0.0  # Not used in velocity control
-        # Back Right Hip:
-        self.rr_hip_msg.control_mode = 3
-        self.rr_hip_msg.input_mode = self.hip_input_mode
-        self.rr_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
-        self.rr_hip_msg.input_vel = 0.0  # Not used
-        self.rr_hip_msg.input_torque = 0.0
-        # Back Left Hip:
-        self.rl_hip_msg.control_mode = 3
-        self.rl_hip_msg.input_mode = self.hip_input_mode
-        self.rl_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
-        self.rl_hip_msg.input_vel = 0.0  # Not used
-        self.rl_hip_msg.input_torque = 0.0  # Not used
+            # Read buttons:
+            x_button = msg.buttons[0]  # X button
+            a_button = msg.buttons[1]  # Y button
+            b_button = msg.buttons[2]  # A button
+            y_button = msg.buttons[3]  # B button
+            left_bumper = msg.buttons[4]  # Left bumper
+            right_bumper = msg.buttons[5]  # Right bumper
 
 
 
-        # ---------------- Joystick Control (Wheels) ---------------
-        # Here we would process the joystick command and set wheel speeds accordingly.
-        left_stick_ud = msg.axes[0]  # Left stick left/right
-        left_stick_lr = msg.axes[1]  # Left stick up/down
+            # Read right joystick for knee control:
+            right_stick_ud = msg.axes[3]
+            right_stick_lr = msg.axes[2]
 
-        # Map joystick inputs to differential wheel speeds:
-        left_wheel_speed = self.max_wheel_vel * left_stick_ud + self.max_wheel_vel * left_stick_lr
-        right_wheel_speed = self.max_wheel_vel * left_stick_ud - self.max_wheel_vel * left_stick_lr
+            # Map joystick inputs to knee velocities:
+            right_knee_vel = self.max_knee_vel * right_stick_ud + self.max_knee_vel * right_stick_lr
+            left_knee_vel = self.max_knee_vel * right_stick_ud - self.max_knee_vel * right_stick_lr
+            
+            # Ensure knee velocities are within limits:
+            left_knee_vel = max(min(left_knee_vel, self.max_knee_vel), -self.max_knee_vel)
+            right_knee_vel = max(min(right_knee_vel, self.max_knee_vel), -self.max_knee_vel)
+
+
+            fr_knee_des_pos = self.fr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
+            fl_knee_des_pos = self.fl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
+            rr_knee_des_pos = self.rr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
+            rl_knee_des_pos = self.rl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
+
+
+            # Map dpad inputs to hip velocities:
+            dpad_ud = msg.axes[5]
+            dpad_lr = msg.axes[4]
+            self.des_hip_splay = self.des_hip_splay + dpad_ud * self.max_hip_vel * self.dt  # Adjust splay angle based on dpad input
+            self.des_hip_splay = max(min(self.des_hip_splay, self.max_hip_angle), self.min_hip_angle)  # Clamp splay angle
+
+            # Change configuration based on button presses:
+            if(a_button == 1):
+                self.des_hip_splay = 0.0  # Reset splay angle
+                fr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos)  # Example usage of nearest_pi function
+                fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos)  # Example usage of nearest_pi function
+                rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos)  # Example usage of nearest_pi function
+                rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos)  # Example usage of nearest_pi function
+            if(x_button == 1):
+                self.des_hip_splay = -0.5  # Reset splay angle
+                fr_knee_des_pos = self.nearest_pi_knee(self.fr_knee_pos) - 1  
+                fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos) + 1
+                rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos) + 1
+                rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos) - 1
+
+            # ---------------- ODrive Control Messages ----------------
+            # Debug hip/knee coupling:
+            self.get_logger().info(f"RR_Hip Angle: {self.rr_hip_pos}, RR_Knee Angle: {self.rr_knee_pos}")
+            compensation_angle = self.rr_hip_pos* self.hip_gear_ratio / self.knee_gear_ratio  # Compensation angle for knee based on hip position
+            self.get_logger().info(f"Compensation angle: {compensation_angle}")
+            # Construct ODrive control messages:
+            # Front Right Knee:
+            self.fr_knee_msg.control_mode = 3
+            self.fr_knee_msg.input_mode = self.knee_input_mode
+            self.fr_knee_msg.input_pos = fr_knee_des_pos  # Not used in velocity
+            self.fr_knee_msg.input_vel = right_knee_vel
+            self.fr_knee_msg.input_torque = 0.0  # Not used in velocity control
+            # Front Left Knee:
+            self.fl_knee_msg.control_mode = 3
+            self.fl_knee_msg.input_mode = self.knee_input_mode
+            self.fl_knee_msg.input_pos = fl_knee_des_pos  # Not used in velocity
+            self.fl_knee_msg.input_vel = right_knee_vel
+            self.fl_knee_msg.input_torque = 0.0  # Not used in velocity control
+            # Back Right Knee:
+            self.rr_knee_msg.control_mode = 3
+            self.rr_knee_msg.input_mode = self.knee_input_mode
+            self.rr_knee_msg.input_pos = rr_knee_des_pos # Not used in velocity
+            self.rr_knee_msg.input_vel = right_knee_vel
+            self.rr_knee_msg.input_torque = 0.0  # Not used in velocity control
+            # Back Left Knee:
+            self.rl_knee_msg.control_mode = 3
+            self.rl_knee_msg.input_mode = self.knee_input_mode
+            self.rl_knee_msg.input_pos = rl_knee_des_pos  # Not used in velocity
+            self.rl_knee_msg.input_vel = left_knee_vel
+            self.rl_knee_msg.input_torque = 0.0  # Not used in velocity control
+            # Front Right Hip:
+            self.fr_hip_msg.control_mode = 3
+            self.fr_hip_msg.input_mode = self.hip_input_mode
+            self.fr_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
+            self.fr_hip_msg.input_vel = 0.0  # Not used
+            self.fr_hip_msg.input_torque = 0.0  # Not used in velocity control
+            # Front Left Hip:
+            self.fl_hip_msg.control_mode = 3
+            self.fl_hip_msg.input_mode = self.hip_input_mode
+            self.fl_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
+            self.fl_hip_msg.input_vel = 0.0  # Not used
+            self.fl_hip_msg.input_torque = 0.0  # Not used in velocity control
+            # Back Right Hip:
+            self.rr_hip_msg.control_mode = 3
+            self.rr_hip_msg.input_mode = self.hip_input_mode
+            self.rr_hip_msg.input_pos = self.des_hip_splay  # Desired hip splay position
+            self.rr_hip_msg.input_vel = 0.0  # Not used
+            self.rr_hip_msg.input_torque = 0.0
+            # Back Left Hip:
+            self.rl_hip_msg.control_mode = 3
+            self.rl_hip_msg.input_mode = self.hip_input_mode
+            self.rl_hip_msg.input_pos = -self.des_hip_splay  # Desired hip splay position
+            self.rl_hip_msg.input_vel = 0.0  # Not used
+            self.rl_hip_msg.input_torque = 0.0  # Not used
+
+
+
+            # ---------------- Joystick Control (Wheels) ---------------
+            # Here we would process the joystick command and set wheel speeds accordingly.
+            left_stick_ud = msg.axes[0]  # Left stick left/right
+            left_stick_lr = msg.axes[1]  # Left stick up/down
+
+            # Map joystick inputs to differential wheel speeds:
+            left_wheel_speed = self.max_wheel_vel * left_stick_ud + self.max_wheel_vel * left_stick_lr
+            right_wheel_speed = self.max_wheel_vel * left_stick_ud - self.max_wheel_vel * left_stick_lr
+
+        # IF SAFETY IS ON: 
+        else:
+            left_wheel_speed = 0.0
+            right_wheel_speed = 0.0
 
         self.wheel_commands.m0_command = "setVel"
         self.wheel_commands.m1_command = "setVel"
@@ -335,6 +375,12 @@ class MainControlLoop(Node):
         self.wheel_commands.m6_value = right_wheel_speed
         self.wheel_commands.m7_value = right_wheel_speed
 
+
+    # Nearest Pi function to calculate closest multiple of pi:
+    def nearest_pi_knee(self, angle):
+        near_pi = np.round(angle/4.73684210526) * 4.73684210526  
+        self.get_logger().info(f"Nearest pi for angle {angle} is {near_pi} motor rotations")
+        return near_pi
 
     # Publish the wheel commands to the wheel command topic:
     def publish_wheel_commands(self):
@@ -430,6 +476,7 @@ class MainControlLoop(Node):
         finally:
             if hasattr(self, '_service_calls_in_progress'):
                 self._service_calls_in_progress -= 1
+
 
 
 def main():
