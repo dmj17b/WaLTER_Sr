@@ -55,3 +55,11 @@ The ```joy_node``` is a built-in ROS2 node that detects joystick inputs and publ
 
 To ensure that this node is working properly, you can run ```ros2 run joy joy_node```, then in a separate terminal ```ros2 topic echo /joy```
 
+
+# BRANCH: INTELLIGENT CONTROL
+
+A new control loop that 
+1. Subscribes to controller status
+2. Performs an OSC QP step
+3. Published desired torque target to the robot
+4. And so on...
