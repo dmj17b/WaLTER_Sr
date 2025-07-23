@@ -378,7 +378,8 @@ class MainControlLoop(Node):
 
     # Nearest Pi function to calculate closest multiple of pi:
     def nearest_pi_knee(self, angle):
-        near_pi = np.round(angle/4.73684210526) * 4.73684210526  
+        value = 0.5*6*30/15
+        near_pi = np.round(angle/value) * value
         self.get_logger().info(f"Nearest pi for angle {angle} is {near_pi} motor rotations")
         return near_pi
 
