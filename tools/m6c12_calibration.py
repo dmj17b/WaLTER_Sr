@@ -6,7 +6,7 @@ import math
 from odrive.utils import dump_errors, request_state
 
 
-NODEID = 2
+NODEID = 7
 
 print("Starting ODrive configuration.")
 
