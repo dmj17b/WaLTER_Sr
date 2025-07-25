@@ -6,7 +6,7 @@ import math
 from odrive.utils import dump_errors, request_state
 
 
-NODEID = 7
+NODEID = 6
 
 print("Starting ODrive configuration.")
 
@@ -34,7 +34,7 @@ odrv.axis0.config.motor.pole_pairs = 14
 odrv.axis0.config.motor.torque_constant = 0.05513333333333333
 odrv.axis0.config.motor.current_soft_max = 36
 odrv.axis0.config.motor.current_hard_max = 56
-odrv.axis0.config.motor.calibration_current = 1
+odrv.axis0.config.motor.calibration_current = 10
 odrv.axis0.config.motor.resistance_calib_max_voltage = 2
 odrv.axis0.config.calibration_lockin.current = 10
 odrv.axis0.motor.motor_thermistor.config.enabled = True
@@ -54,12 +54,12 @@ odrv.can.config.protocol = Protocol.SIMPLE
 odrv.can.config.baud_rate = 1000000
 odrv.axis0.config.can.node_id = NODEID
 odrv.axis0.config.can.heartbeat_msg_rate_ms = 10
-odrv.axis0.config.can.encoder_msg_rate_ms = 2
-odrv.axis0.config.can.iq_msg_rate_ms = 2
-odrv.axis0.config.can.torques_msg_rate_ms = 2
-odrv.axis0.config.can.error_msg_rate_ms = 2
-odrv.axis0.config.can.temperature_msg_rate_ms = 2
-odrv.axis0.config.can.bus_voltage_msg_rate_ms = 2
+odrv.axis0.config.can.encoder_msg_rate_ms = 10
+odrv.axis0.config.can.iq_msg_rate_ms = 10
+odrv.axis0.config.can.torques_msg_rate_ms = 10
+odrv.axis0.config.can.error_msg_rate_ms = 10
+odrv.axis0.config.can.temperature_msg_rate_ms = 10
+odrv.axis0.config.can.bus_voltage_msg_rate_ms = 10
 odrv.axis0.config.enable_watchdog = False
 odrv.axis0.config.load_encoder = EncoderId.ONBOARD_ENCODER0
 odrv.axis0.config.commutation_encoder = EncoderId.ONBOARD_ENCODER0
