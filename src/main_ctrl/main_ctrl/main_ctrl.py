@@ -384,7 +384,6 @@ class MainControlLoop(Node):
     def nearest_pi_knee(self, angle):
         value = 0.5*6*30/15
         near_pi = np.round(angle/value) * value
-        self.get_logger().info(f"Nearest pi for angle {angle} is {near_pi} motor rotations")
         return near_pi
 
     # Publish the wheel commands to the wheel command topic:
