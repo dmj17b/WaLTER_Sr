@@ -23,9 +23,9 @@ class MainControlLoop(Node):
         self.dt = 0.1  # Control loop period in seconds (10ms)
 
         # Wheel control variables:
-        self.max_wheel_vel = 25.0
+        self.max_wheel_vel = 20
         self.wheel_commands = WheelCommands()
-        self.hip_input_mode = 3
+        self.hip_input_mode = 5
         self.knee_input_mode = 3
 
         # Mechanism:
@@ -34,7 +34,7 @@ class MainControlLoop(Node):
 
         # ODrive control/status variables:
         self.des_hip_splay = 0.0
-        self.max_knee_vel = 20.0
+        self.max_knee_vel = 8.0
         self.max_hip_angle = 1.0  # radians
         self.min_hip_angle = -0.5  # radians
         self.max_hip_vel = 0.5  # radians per second
@@ -80,7 +80,7 @@ class MainControlLoop(Node):
         # Timer to publish wheel commands at a regular interval:
         self.wheel_timer = self.create_timer(0.05, self.publish_wheel_commands)
 
-        self.odrive_init_timer = self.create_timer(1.0, callback = self.initialize_odrives)  # Initialize ODrives after 3 seconds
+        self.odrive_init_timer = self.create_timer(0.5, callback = self.initialize_odrives)  # Initialize ODrives after 3 seconds
     
 
 
@@ -199,7 +199,7 @@ class MainControlLoop(Node):
         self.get_logger().info("ODrive control message publishers initialized")
 
         # Create a timer to publish ODrive commands at a regular interval:
-        self.odrive_timer = self.create_timer(0.01, self.publish_odrive_commands)
+        self.odrive_timer = self.create_timer(0.005, self.publish_odrive_commands)
         self.get_logger().info("ODrive command publisher initialized")
         self.odrive_initialized = True
 
@@ -262,7 +262,7 @@ class MainControlLoop(Node):
 
             fr_knee_des_pos = self.fr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
             fl_knee_des_pos = self.fl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
-            rr_knee_des_pos = self.rr_knee_pos + right_knee_vel * self.dt  # Assuming 10ms control loop
+            rr_knee_des_pos = self.rr_knee_pos + right_knee_vel * self.dt # Assuming 10ms control loop
             rl_knee_des_pos = self.rl_knee_pos - left_knee_vel * self.dt  # Assuming 10ms control loop
 
 
@@ -271,7 +271,6 @@ class MainControlLoop(Node):
             dpad_lr = msg.axes[4]
             self.des_hip_splay = self.des_hip_splay + dpad_ud * self.max_hip_vel * self.dt  # Adjust splay angle based on dpad input
             self.des_hip_splay = max(min(self.des_hip_splay, self.max_hip_angle), self.min_hip_angle)  # Clamp splay angle
-
             # Change configuration based on button presses:
             if(a_button == 1):
                 self.des_hip_splay = 0.0  # Reset splay angle
@@ -285,12 +284,17 @@ class MainControlLoop(Node):
                 fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos) + 1
                 rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos) + 1
                 rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos) - 1
+            if(y_button == 1):
+                self.des_hip_splay = 0.5  # Reset splay angle
+                fr_knee_des_pos = self.nearest_pi_knee(self.fr_knee_pos) + self.fr_hip_pos
+                fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos) + self.fl_hip_pos
+                rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos) + self.rr_hip_pos
+                rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos) + self.rl_hip_pos
+                self.get_logger().info(f"Setting hip splay to {self.des_hip_splay} radians")
+                self.get_logger().info(f"Setting knee positions to FR: {fr_knee_des_pos}, FL: {fl_knee_des_pos}, RR: {rr_knee_des_pos}, RL: {rl_knee_des_pos}")
 
             # ---------------- ODrive Control Messages ----------------
-            # Debug hip/knee coupling:
-            # self.get_logger().info(f"RR_Hip Angle: {self.rr_hip_pos}, RR_Knee Angle: {self.rr_knee_pos}")
-            # compensation_angle = self.rr_hip_pos* self.hip_gear_ratio / self.knee_gear_ratio  # Compensation angle for knee based on hip position
-            # self.get_logger().info(f"Compensation angle: {compensation_angle}")
+
             # Construct ODrive control messages:
             # Front Right Knee:
             self.fr_knee_msg.control_mode = 3
@@ -478,6 +482,16 @@ class MainControlLoop(Node):
             if hasattr(self, '_service_calls_in_progress'):
                 self._service_calls_in_progress -= 1
 
+    def destroy_node(self):
+        # Clean up any resources before shutting down
+        self.get_logger().info("Destroying main control loop node")
+        super().destroy_node()
+        if self.odrive_timer:
+            self.odrive_timer.cancel()
+        if self.wheel_timer:
+            self.wheel_timer.cancel()
+        for client in self.axis_state_clients.values():
+            client.destroy()
 
 
 def main():
