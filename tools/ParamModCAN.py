@@ -168,6 +168,11 @@ for motor in [fr_knee, fl_knee, rl_knee, fr_hip, fl_hip, rl_hip, rr_knee, rr_hip
     print(f"Current Soft Max: {motor.read('axis0.config.I_bus_soft_max')}")
     print(f"Trap Traj Vel Limit: {motor.read('axis0.trap_traj.config.vel_limit')}")
     print(f"Trap Traj Accel Limit: {motor.read('axis0.trap_traj.config.accel_limit')}")
+    print(f"Spinout Electrical Power Threshold: {motor.read('axis0.controller.config.spinout_electrical_power_threshold')}")
+    print(f"Spinout Mechanical Power Threshold: {motor.read('axis0.controller.config.spinout_mechanical_power_threshold')}")
+    print(f"Inertia value: {motor.read('axis0.controller.config.inertia')}")
+    motor.pos = motor.read('axis0.pos_vel_mapper.pos_rel')
+    print(f"Motor Position: {motor.pos}")
     print("\n")
 
     ''' Change communication rates'''  
@@ -180,8 +185,14 @@ for motor in [fr_knee, fl_knee, rl_knee, fr_hip, fl_hip, rl_hip, rr_knee, rr_hip
     motor.write('axis0.config.can.torques_msg_rate_ms', 10) 
     motor.write('axis0.config.can.powers_msg_rate_ms', 0) 
     motor.write('axis0.controller.config.vel_limit', 45)  # Set velocity limit to 25 rad/s
-    motor.write('axis0.trap_traj.config.vel_limit', 25)  # Set trajectory velocity limit to 25 rad/s
-    motor.write('axis0.trap_traj.config.accel_limit', 25)  # Set trajectory acceleration limit to 25 rad/s^2
+    motor.write('axis0.trap_traj.config.vel_limit', 450)  # Set trajectory velocity limit to 25 rad/s
+    motor.write('axis0.trap_traj.config.accel_limit', 25)  # Set trajectory acceleration limit to 25 rad/s^2'
+    motor.write('axis0.controller.config.spinout_electrical_power_threshold', 50)  # Set spinout electrical power threshold
+    motor.write('axis0.controller.config.spinout_mechanical_power_threshold', -50)
+    motor.write('axis0.controller.config.inertia', 0.0)  # Set inertia value
+    motor.write('axis0.pos_vel_mapper.config.offset', motor.pos)  # Set position relative to 0
+    # motor.write('axis0.commutation_mapper.config.offset', 0.0)  # Set index offset to 0
+
     # Save configuration to flash memory
     motor.save_config()
     print(f"Updated communication rates and saved configuration for Node ID: {motor.node_id}")

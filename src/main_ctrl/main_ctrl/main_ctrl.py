@@ -26,7 +26,7 @@ class MainControlLoop(Node):
         self.max_wheel_vel = 20
         self.wheel_commands = WheelCommands()
         self.hip_input_mode = 5
-        self.knee_input_mode = 3
+        self.knee_input_mode = 5
 
         # Mechanism:
         self.knee_gear_ratio = 6.0*30.0/15.0  # Gear ratio for knee motors (6:1 planetary * 30:19 pulley)
@@ -34,7 +34,7 @@ class MainControlLoop(Node):
 
         # ODrive control/status variables:
         self.des_hip_splay = 0.0
-        self.max_knee_vel = 8.0
+        self.max_knee_vel = 320.0
         self.max_hip_angle = 1.0  # radians
         self.min_hip_angle = -0.5  # radians
         self.max_hip_vel = 0.5  # radians per second
@@ -290,8 +290,6 @@ class MainControlLoop(Node):
                 fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos) + self.fl_hip_pos
                 rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos) + self.rr_hip_pos
                 rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos) + self.rl_hip_pos
-                self.get_logger().info(f"Setting hip splay to {self.des_hip_splay} radians")
-                self.get_logger().info(f"Setting knee positions to FR: {fr_knee_des_pos}, FL: {fl_knee_des_pos}, RR: {rr_knee_des_pos}, RL: {rl_knee_des_pos}")
 
             # ---------------- ODrive Control Messages ----------------
 
