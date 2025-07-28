@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'main_ctrl = main_ctrl.main_ctrl:main',
+            'intelligent_ctrl = main_ctrl.intelligent_ctrl:main',
         ],
     },
 )
