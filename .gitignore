@@ -4,4 +4,4 @@ log
 .vscode
 tools/env
 tools/__pycache__
-testdata/*
+bags/*

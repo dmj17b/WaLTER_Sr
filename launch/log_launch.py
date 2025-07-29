@@ -126,10 +126,10 @@ def generate_launch_description():
 
     date = os.popen('date +%Y-%m-%d_%H-%M-%S').read().strip()
     bag_folder = os.path.join(bag_folder, date)
-    # os.makedirs(bag_folder, exist_ok=True)
+    os.makedirs(bag_folder, exist_ok=True)
 
     record_all_topics = [
-        'ros2', 'bag', 'record', '-a', '-o', os.path.join(bag_folder), 
+        'ros2', 'bag', 'record', '-a', '-o', os.path.join(bag_folder), '--storage-preset-profile', 'resilient', 
     ]
 
     ros_bagger = ExecuteProcess(
