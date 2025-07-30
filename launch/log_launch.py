@@ -1,5 +1,10 @@
 from launch import LaunchDescription
+from launch.substitutions import LaunchConfiguration
+from launch.actions import ExecuteProcess
 from launch_ros.actions import Node
+from launch.actions import TimerAction
+import os
+
 
 def generate_launch_description():
     # Declare launch arguments
@@ -85,7 +90,6 @@ def generate_launch_description():
             'interface' : 'can0',
         }] 
     )
-
     # Main control node 
     # This node handles the main control loop, reading joystick inputs and mappng them to hip/knee/wheel commands
     main_ctrl_node= Node(
@@ -101,8 +105,14 @@ def generate_launch_description():
         package='joy',
         executable='joy_node',
         name='joy_node',
+        parameters=[{
+            'deadzone': 0.1,
+            'dev': '/dev/input/js0',
+            'coalesce_interval': 0.05,
+        }]
 
     )
+
 
     # Wheel control node
     # This node subscribes to the 'wheel_commands' topic and sends commands to the wheel driver board
@@ -111,15 +121,37 @@ def generate_launch_description():
         executable='wheel_control',
         name='wheel_ctrl',
     )
+
+    bag_folder = os.path.join(os.getcwd(), 'bags')
+
+    date = os.popen('date +%Y-%m-%d_%H-%M-%S').read().strip()
+    bag_folder = os.path.join(bag_folder, date)
+    os.makedirs(bag_folder, exist_ok=True)
+
+    record_all_topics = [
+        'ros2', 'bag', 'record', '-a', '-o', os.path.join(bag_folder), '--storage-preset-profile', 'resilient', 
+    ]
+
+    ros_bagger = ExecuteProcess(
+        cmd=record_all_topics,
+        shell=True,
+        name='record_all_topics',
+        output='screen',
+        emulate_tty=True
+    )
     
     return LaunchDescription([
+        ros_bagger,
+        joy_node,
+        wheel_ctrl_node,
         fr_hip,
         fr_knee,
-        fl_knee,
         fl_hip,
+        fl_knee,
         rr_hip,
         rr_knee,
         rl_hip,
         rl_knee,
+        main_ctrl_node,
 
     ])
