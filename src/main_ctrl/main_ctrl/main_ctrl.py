@@ -23,7 +23,7 @@ class MainControlLoop(Node):
         self.dt = 0.1  # Control loop period in seconds (10ms)
 
         # Wheel control variables:
-        self.max_wheel_vel = 20
+        self.max_wheel_vel = 30
         self.wheel_commands = WheelCommands()
         self.hip_input_mode = 5
         self.knee_input_mode = 5
@@ -489,6 +489,8 @@ class MainControlLoop(Node):
             self.wheel_timer.cancel()
         for client in self.axis_state_clients.values():
             client.destroy()
+
+
 
 
 def main():

@@ -185,8 +185,8 @@ for motor in [fr_knee, fl_knee, rl_knee, fr_hip, fl_hip, rl_hip, rr_knee, rr_hip
     motor.write('axis0.config.can.torques_msg_rate_ms', 10) 
     motor.write('axis0.config.can.powers_msg_rate_ms', 0) 
     motor.write('axis0.controller.config.vel_limit', 45)  # Set velocity limit to 25 rad/s
-    motor.write('axis0.trap_traj.config.vel_limit', 450)  # Set trajectory velocity limit to 25 rad/s
-    motor.write('axis0.trap_traj.config.accel_limit', 25)  # Set trajectory acceleration limit to 25 rad/s^2'
+    motor.write('axis0.trap_traj.config.vel_limit', 45)  # Set trajectory velocity limit to 25 rad/s
+    motor.write('axis0.trap_traj.config.accel_limit', 15)  # Set trajectory acceleration limit to 25 rad/s^2'
     motor.write('axis0.controller.config.spinout_electrical_power_threshold', 50)  # Set spinout electrical power threshold
     motor.write('axis0.controller.config.spinout_mechanical_power_threshold', -50)
     motor.write('axis0.controller.config.inertia', 0.0)  # Set inertia value
