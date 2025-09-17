@@ -309,10 +309,10 @@ class MainControlLoop(Node):
 
             if left_bumper:
                 self.fr_knee_vel_gain -= 1
-                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', gain)
+                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', self.fr_knee_vel_gain)
             if right_bumper:
                 self.fr_knee_vel_gain += 1
-                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', gain)
+                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', self.fr_knee_vel_gain)
 
             # ---------------- ODrive Control Messages ----------------
 
