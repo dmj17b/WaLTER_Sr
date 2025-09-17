@@ -8,6 +8,14 @@ from odrive_can.srv import AxisState
 import time
 import numpy as np
 
+import sys
+import os
+# Add the WaLTER_Sr directory to Python path
+walter_sr_path = os.path.join(os.path.dirname(__file__), '../../../../')
+sys.path.insert(0, walter_sr_path)
+
+from tools.ParamModCAN import ODriveModifier
+
 '''This is the main control loop for the robot. Here is where we will subscribe to joystick commands, process outputs, and then publish wheel/leg commands.'''
 
 # Create a node for the main control loop:
@@ -198,6 +206,13 @@ class MainControlLoop(Node):
         self.rl_knee_pub = self.create_publisher(ControlMessage, '/rl_knee/control_message', qos_profile)
         self.get_logger().info("ODrive control message publishers initialized")
 
+
+        # ==== adding position gain for front right hip testing ====
+
+        self.fr_knee_mod = ODriveModifier(node_id= 0)
+        self.fr_knee_vel_gain = self.fr_knee_mod.read('axis0.controller.config.vel_gain')
+
+
         # Create a timer to publish ODrive commands at a regular interval:
         self.odrive_timer = self.create_timer(0.005, self.publish_odrive_commands)
         self.get_logger().info("ODrive command publisher initialized")
@@ -290,6 +305,14 @@ class MainControlLoop(Node):
                 fl_knee_des_pos = self.nearest_pi_knee(self.fl_knee_pos) + self.fl_hip_pos
                 rr_knee_des_pos = self.nearest_pi_knee(self.rr_knee_pos) + self.rr_hip_pos
                 rl_knee_des_pos = self.nearest_pi_knee(self.rl_knee_pos) + self.rl_hip_pos
+
+
+            if left_bumper:
+                self.fr_knee_vel_gain -= 1
+                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', gain)
+            if right_bumper:
+                self.fr_knee_vel_gain += 1
+                self.fr_knee_mod.write_realtime('axis0.controller.config.vel_gain', gain)
 
             # ---------------- ODrive Control Messages ----------------
 

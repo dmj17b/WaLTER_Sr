@@ -94,6 +94,16 @@ class ODriveModifier:
                 break
         time.sleep(0.01)  # Wait a bit to ensure the write is processed
     
+    def write_realtime(self, path, value):
+        """Real time writing function to allow for increased control"""
+        endpoint_id = self.endpoints[path]['id']
+        endpoint_type = self.endpoints[path]['type']
+
+        self.bus.send(can.Message(
+            arbitration_id=(self.node_id << 5 | 0x04), # 0x04: RxSdo
+            data=struct.pack('<BHB' + self.format_lookup[endpoint_type], OPCODE_WRITE, endpoint_id, 0, value),
+            is_extended_id=False
+        ))
 
     def read(self, path):
         """Read a value from the ODrive."""
@@ -118,8 +128,7 @@ class ODriveModifier:
         _, _, _, return_value = struct.unpack_from('<BHB' + self.format_lookup[endpoint_type], msg.data)
         time.sleep(0.01)
         return return_value
-    
-    
+   
     def save_config(self):
         """Save the current configuration to flash."""
         path = "save_configuration"
