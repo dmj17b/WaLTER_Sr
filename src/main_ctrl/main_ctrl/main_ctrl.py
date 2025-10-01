@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSDurabilityPolicy
-from interfaces.msg import WheelCommands
+from interfaces.msg import BoomWheelCmds
 from sensor_msgs.msg import Joy
 from odrive_can.msg import ODriveStatus, ControlMessage, ControllerStatus
 from odrive_can.srv import AxisState
@@ -24,7 +24,6 @@ class MainControlLoop(Node):
 
         # Wheel control variables:
         self.max_wheel_vel = 20
-        self.wheel_commands = WheelCommands()
         self.hip_input_mode = 5
         self.knee_input_mode = 3
 
@@ -57,7 +56,7 @@ class MainControlLoop(Node):
 
         # Create joystick subscriber:
         self.joystick_subscriber = self.create_subscription(msg_type = Joy, topic = 'joy', callback=self.joy_callback, qos_profile=qos_profile)
-        self.wheel_publisher_ = self.create_publisher(WheelCommands, 'wheel_commands', qos_profile)
+        self.wheel_publisher_ = self.create_publisher(BoomWheelCmds, 'wheel_commands', qos_profile)
 
         # Timer to publish wheel commands at a regular interval:
         self.wheel_timer = self.create_timer(0.05, self.publish_wheel_commands)
@@ -89,6 +88,7 @@ class MainControlLoop(Node):
         # ODrive control messages:
         self.hip_msg = ControlMessage(control_mode = 3, input_mode = 5)
         self.knee_msg = ControlMessage(control_mode = 3, input_mode = 5)
+        self.wheel_msg = BoomWheelCmds()
 
         self.get_logger().info("ODrive control messages initialized")
 
@@ -216,16 +216,24 @@ class MainControlLoop(Node):
             left_stick_lr = msg.axes[1]  # Left stick up/down
 
             # Map joystick inputs to differential wheel speeds:
-            left_wheel_speed = self.max_wheel_vel * left_stick_ud + self.max_wheel_vel * left_stick_lr
-            right_wheel_speed = self.max_wheel_vel * left_stick_ud - self.max_wheel_vel * left_stick_lr
-
+            wheel_speed = self.max_wheel_vel * left_stick_ud + self.max_wheel_vel * left_stick_lr
+            wheel_duty = self.intmap(wheel_speed, -self.max_wheel_vel, self.max_wheel_vel, -100, 100)
+            
+            self.wheel_msg.duty1 = wheel_duty
+            self.wheel_msg.duty2 = wheel_duty
         # IF SAFETY IS ON: 
         else:
-            left_wheel_speed = 0.0
-            right_wheel_speed = 0.0
+            wheel_duty = 0
+            self.wheel_msg.duty1 = wheel_duty
+            self.wheel_msg.duty2 = wheel_duty
 
-
-
+    # Map float to int
+    def intmap(self, val, val_min, val_max, int_min, int_max):
+        # Clamp val to be within val_min and val_max
+        val = max(min(val, val_max), val_min)
+        # Map the value
+        mapped_val = int((val - val_min) / (val_max - val_min) * (int_max - int_min) + int_min)
+        return mapped_val
     # Nearest Pi function to calculate closest multiple of pi:
     def nearest_pi_knee(self, angle):
         value = 0.5*6*30/15
@@ -236,7 +244,7 @@ class MainControlLoop(Node):
     def publish_wheel_commands(self):
         if not self.odrive_initialized:
             return
-        self.wheel_publisher_.publish(self.wheel_commands)
+        self.wheel_publisher_.publish(self.wheel_msg)
 
 
     # Callbacks for ODrive status messages:

@@ -15,6 +15,7 @@
   <exec_depend>interfaces</exec_depend>
   <exec_depend>numpy</exec_depend>
   <exec_depend>pyserial</exec_depend>
+  <exec_depend>Motor</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>

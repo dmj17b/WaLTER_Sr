@@ -26,6 +26,11 @@ def generate_launch_description():
             'interface' : 'can0',
         }] 
     )
+    wheels = Node(
+        package = 'pi_wheel_ctrl',
+        executable = 'pi_wheel_ctrl',
+        name = 'wheel_ctrl',
+    )
     # Main control node 
     # This node handles the main control loop, reading joystick inputs and mappng them to hip/knee/wheel commands
     main_ctrl_node= Node(
@@ -54,7 +59,9 @@ def generate_launch_description():
     return LaunchDescription([
         hip,
         knee,
+        wheels,
         joy_node,
         main_ctrl_node,
+
 
     ])
