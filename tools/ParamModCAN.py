@@ -69,6 +69,7 @@ class ODriveModifier:
                 break
         # Unpack and return reply
         _, hw_product_line, hw_version, hw_variant, fw_major, fw_minor, fw_revision, fw_unreleased = struct.unpack('<BBBBBBBB', msg.data)
+        print(f"Node ID {self.node_id} - Hardware Version: {hw_product_line}.{hw_version}.{hw_variant}, Firmware Version: {fw_major}.{fw_minor}.{fw_revision}.{fw_unreleased}")
         # If one of these asserts fail, you're probably not using the right flat_endpoints.json file
         assert endpoint_data['fw_version'] == f"{fw_major}.{fw_minor}.{fw_revision}"
         assert endpoint_data['hw_version'] == f"{hw_product_line}.{hw_version}.{hw_variant}"
@@ -88,12 +89,9 @@ class ODriveModifier:
             is_extended_id=False
         ))
 
-        # Await confirmation (if firmware >= 0.6.11)
-        for msg in self.bus:
-            if msg.is_rx and msg.arbitration_id == (self.node_id << 5 | 0x05):
-                break
-        time.sleep(0.01)  # Wait a bit to ensure the write is processed
-    
+        # Only wait for confirmation if firmware supports it
+        # For older firmware, just add a delay
+        time.sleep(0.05)  # Increase delay for reliability
 
     def read(self, path):
         """Read a value from the ODrive."""
@@ -133,19 +131,13 @@ class ODriveModifier:
 
 
 
-fr_knee = ODriveModifier(node_id=0, channel="can1")
-fl_knee = ODriveModifier(node_id=2, channel="can1")
-rl_knee = ODriveModifier(node_id=4, channel="can0")
-rr_knee = ODriveModifier(node_id=6, channel="can0")
+knee = ODriveModifier(node_id=0, channel="can0")
+hip = ODriveModifier(node_id=1, channel="can0")
 
-fr_hip = ODriveModifier(node_id=1, channel="can1")
-fl_hip = ODriveModifier(node_id=3, channel="can1")
-rl_hip = ODriveModifier(node_id=5, channel="can0")
-rr_hip = ODriveModifier(node_id=7, channel="can0")
 
 
 ''' Update Knee Parameters'''
-for motor in [fr_knee, fl_knee, rl_knee, fr_hip, fl_hip, rl_hip, rr_knee, rr_hip]:
+for motor in [knee,hip]:
     motor.check_version()  # Check ODrive version
 
     ''' Check CAN communication rates'''

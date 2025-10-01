@@ -1,365 +1,286 @@
 {
-    "fw_version": "0.6.11",
+    "fw_version": "0.6.10",
     "hw_version": "4.4.58",
-    "crc": 55416,
+    "crc": 23946,
     "endpoints": {
         "vbus_voltage": {
             "id": 1,
-            "type": "float",
-            "access": "r"
+            "type": "float"
         },
         "ibus": {
             "id": 2,
-            "type": "float",
-            "access": "r"
+            "type": "float"
         },
         "ibus_report_filter_k": {
             "id": 3,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
         "control_loop_hz": {
             "id": 4,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "serial_number": {
             "id": 5,
-            "type": "uint64",
-            "access": "r"
+            "type": "uint64"
         },
         "hw_version_major": {
             "id": 6,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "hw_version_minor": {
             "id": 7,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "hw_version_variant": {
             "id": 8,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "hw_version_revision": {
             "id": 9,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "fw_version_major": {
             "id": 10,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "fw_version_minor": {
             "id": 11,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "fw_version_revision": {
             "id": 12,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "commit_hash": {
             "id": 13,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "fw_version_unreleased": {
             "id": 14,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "bootloader_version": {
             "id": 15,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "n_evt_sampling": {
             "id": 16,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "n_evt_control_loop": {
             "id": 17,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_timers_armed": {
             "id": 18,
-            "type": "bool",
-            "access": "rw"
+            "type": "bool"
         },
         "task_times.sampling.start_time": {
             "id": 19,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.sampling.end_time": {
             "id": 20,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.sampling.length": {
             "id": 21,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.sampling.max_length": {
             "id": 22,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "task_times.encoder_update.start_time": {
             "id": 23,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.encoder_update.end_time": {
             "id": 24,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.encoder_update.length": {
             "id": 25,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.encoder_update.max_length": {
             "id": 26,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "task_times.control_loop_misc.start_time": {
             "id": 27,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_misc.end_time": {
             "id": 28,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_misc.length": {
             "id": 29,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_misc.max_length": {
             "id": 30,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "task_times.control_loop_checks.start_time": {
             "id": 31,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_checks.end_time": {
             "id": 32,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_checks.length": {
             "id": 33,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.control_loop_checks.max_length": {
             "id": 34,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "task_times.current_sense_wait.start_time": {
             "id": 35,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.current_sense_wait.end_time": {
             "id": 36,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.current_sense_wait.length": {
             "id": 37,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.current_sense_wait.max_length": {
             "id": 38,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "task_times.dc_calib_wait.start_time": {
             "id": 39,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.dc_calib_wait.end_time": {
             "id": 40,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.dc_calib_wait.length": {
             "id": 41,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "task_times.dc_calib_wait.max_length": {
             "id": 42,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint32"
         },
         "system_stats.uptime": {
             "id": 43,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.min_heap_space": {
             "id": 44,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.max_stack_usage_axis": {
             "id": 45,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.max_stack_usage_comms": {
             "id": 46,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.max_stack_usage_uart": {
             "id": 47,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.max_stack_usage_startup": {
             "id": 48,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.stack_size_axis": {
             "id": 49,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.stack_size_comms": {
             "id": 50,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.stack_size_uart": {
             "id": 51,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.stack_size_startup": {
             "id": 52,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.prio_axis": {
             "id": 53,
-            "type": "int32",
-            "access": "r"
+            "type": "int32"
         },
         "system_stats.prio_comms": {
             "id": 54,
-            "type": "int32",
-            "access": "r"
+            "type": "int32"
         },
         "system_stats.prio_uart": {
             "id": 55,
-            "type": "int32",
-            "access": "r"
+            "type": "int32"
         },
         "system_stats.prio_startup": {
             "id": 56,
-            "type": "int32",
-            "access": "r"
+            "type": "int32"
         },
         "system_stats.usb.rx_cnt": {
             "id": 57,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.usb.tx_cnt": {
             "id": 58,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.usb.tx_overrun_cnt": {
             "id": 59,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.i2c.addr": {
             "id": 60,
-            "type": "uint8",
-            "access": "r"
+            "type": "uint8"
         },
         "system_stats.i2c.addr_match_cnt": {
             "id": 61,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.i2c.rx_cnt": {
             "id": 62,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "system_stats.i2c.error_cnt": {
             "id": 63,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "user_config_loaded": {
             "id": 64,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "misconfigured": {
             "id": 65,
-            "type": "bool",
-            "access": "r"
+            "type": "bool"
         },
         "oscilloscope.size": {
             "id": 66,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "oscilloscope.pos": {
             "id": 67,
-            "type": "uint32",
-            "access": "r"
+            "type": "uint32"
         },
         "oscilloscope.rollover": {
             "id": 68,
-            "type": "bool",
-            "access": "r"
+            "type": "bool"
         },
         "oscilloscope.recording": {
             "id": 69,
-            "type": "bool",
-            "access": "r"
-        },
-        "oscilloscope.trigger_pos": {
-            "id": 70,
-            "type": "uint32",
-            "access": "r"
-        },
-        "oscilloscope.triggered_at": {
-            "id": 71,
-            "type": "uint32",
-            "access": "r"
+            "type": "bool"
         },
         "oscilloscope.config": {
-            "id": 72,
+            "id": 70,
             "type": "function",
             "inputs": [
                 {
@@ -402,7 +323,7 @@
             "outputs": []
         },
         "oscilloscope.trigger": {
-            "id": 82,
+            "id": 80,
             "type": "function",
             "inputs": [
                 {
@@ -413,13 +334,13 @@
             "outputs": []
         },
         "oscilloscope.trigger_high_res": {
-            "id": 84,
+            "id": 82,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "oscilloscope.get_raw": {
-            "id": 85,
+            "id": 83,
             "type": "function",
             "inputs": [
                 {
@@ -447,57 +368,11 @@
             ]
         },
         "debug.hal_ticks": {
-            "id": 91,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_0_raw": {
-            "id": 92,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_1_raw": {
-            "id": 93,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_2_raw": {
-            "id": 94,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_3_raw": {
-            "id": 95,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_4_raw": {
-            "id": 96,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.adc_slot_10_raw": {
-            "id": 97,
-            "type": "uint32",
-            "access": "r"
-        },
-        "debug.vref": {
-            "id": 98,
-            "type": "float",
-            "access": "r"
-        },
-        "debug.mcu_temperature": {
-            "id": 99,
-            "type": "float",
-            "access": "r"
-        },
-        "debug.factory_data_loaded": {
-            "id": 100,
-            "type": "bool",
-            "access": "r"
+            "id": 89,
+            "type": "uint32"
         },
         "debug.block": {
-            "id": 101,
+            "id": 90,
             "type": "function",
             "inputs": [
                 {
@@ -507,106 +382,52 @@
             ],
             "outputs": []
         },
-        "debug.factory_data_start": {
-            "id": 103,
-            "type": "function",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "bool"
-                }
-            ]
-        },
-        "debug.factory_data_write": {
-            "id": 105,
-            "type": "function",
-            "inputs": [
-                {
-                    "name": "val",
-                    "type": "uint8"
-                }
-            ],
-            "outputs": []
-        },
-        "debug.factory_data_end": {
-            "id": 107,
-            "type": "function",
-            "inputs": [
-                {
-                    "name": "length",
-                    "type": "uint32"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "success",
-                    "type": "bool"
-                }
-            ]
-        },
         "can.error": {
-            "id": 110,
-            "type": "uint8",
-            "access": "rw"
+            "id": 92,
+            "type": "uint8"
         },
         "can.n_restarts": {
-            "id": 111,
-            "type": "uint32",
-            "access": "rw"
+            "id": 93,
+            "type": "uint32"
         },
         "can.n_rx": {
-            "id": 112,
-            "type": "uint32",
-            "access": "rw"
-        },
-        "can.effective_baudrate": {
-            "id": 113,
-            "type": "uint32",
-            "access": "rw"
+            "id": 94,
+            "type": "uint32"
         },
         "can.config.baud_rate": {
-            "id": 114,
-            "type": "uint32",
-            "access": "rw"
+            "id": 95,
+            "type": "uint32"
         },
         "can.config.data_baud_rate": {
-            "id": 115,
-            "type": "uint32",
-            "access": "rw"
+            "id": 96,
+            "type": "uint32"
         },
         "can.config.tx_brs": {
-            "id": 116,
-            "type": "uint32",
-            "access": "rw"
+            "id": 97,
+            "type": "uint32"
         },
         "can.config.protocol": {
-            "id": 117,
-            "type": "uint8",
-            "access": "rw"
+            "id": 98,
+            "type": "uint8"
         },
         "test_property": {
-            "id": 118,
-            "type": "uint32",
-            "access": "rw"
+            "id": 99,
+            "type": "uint32"
         },
         "identify": {
-            "id": 119,
-            "type": "bool",
-            "access": "rw"
+            "id": 100,
+            "type": "bool"
         },
         "reboot_required": {
-            "id": 120,
-            "type": "bool",
-            "access": "rw"
+            "id": 101,
+            "type": "bool"
         },
         "issues.length": {
-            "id": 121,
-            "type": "uint32",
-            "access": "r"
+            "id": 102,
+            "type": "uint32"
         },
         "issues.get": {
-            "id": 122,
+            "id": 103,
             "type": "function",
             "inputs": [
                 {
@@ -634,7 +455,7 @@
             ]
         },
         "auth.get_pub_key1": {
-            "id": 128,
+            "id": 109,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -673,7 +494,7 @@
             ]
         },
         "auth.get_cert1": {
-            "id": 137,
+            "id": 118,
             "type": "function",
             "inputs": [
                 {
@@ -701,7 +522,7 @@
             ]
         },
         "auth.auth1": {
-            "id": 143,
+            "id": 124,
             "type": "function",
             "inputs": [
                 {
@@ -757,932 +578,739 @@
             ]
         },
         "config.enable_uart_a": {
-            "id": 156,
-            "type": "bool",
-            "access": "rw"
+            "id": 137,
+            "type": "bool"
         },
         "config.uart_a_baudrate": {
-            "id": 157,
-            "type": "uint32",
-            "access": "rw"
+            "id": 138,
+            "type": "uint32"
         },
         "config.usb_cdc_protocol": {
-            "id": 158,
-            "type": "uint8",
-            "access": "rw"
+            "id": 139,
+            "type": "uint8"
         },
         "config.uart0_protocol": {
-            "id": 159,
-            "type": "uint8",
-            "access": "rw"
+            "id": 140,
+            "type": "uint8"
         },
         "config.max_regen_current": {
-            "id": 160,
-            "type": "float",
-            "access": "rw"
+            "id": 141,
+            "type": "float"
         },
         "config.dc_bus_undervoltage_trip_level": {
-            "id": 161,
-            "type": "float",
-            "access": "rw"
+            "id": 142,
+            "type": "float"
         },
         "config.dc_bus_overvoltage_trip_level": {
-            "id": 162,
-            "type": "float",
-            "access": "rw"
+            "id": 143,
+            "type": "float"
         },
         "config.dc_max_positive_current": {
-            "id": 163,
-            "type": "float",
-            "access": "rw"
+            "id": 144,
+            "type": "float"
         },
         "config.dc_max_negative_current": {
-            "id": 164,
-            "type": "float",
-            "access": "rw"
+            "id": 145,
+            "type": "float"
         },
         "config.user_config_0": {
-            "id": 165,
-            "type": "uint32",
-            "access": "rw"
+            "id": 146,
+            "type": "uint32"
         },
         "config.user_config_1": {
-            "id": 166,
-            "type": "uint32",
-            "access": "rw"
+            "id": 147,
+            "type": "uint32"
         },
         "config.user_config_2": {
-            "id": 167,
-            "type": "uint32",
-            "access": "rw"
+            "id": 148,
+            "type": "uint32"
         },
         "config.user_config_3": {
-            "id": 168,
-            "type": "uint32",
-            "access": "rw"
+            "id": 149,
+            "type": "uint32"
         },
         "config.user_config_4": {
-            "id": 169,
-            "type": "uint32",
-            "access": "rw"
+            "id": 150,
+            "type": "uint32"
         },
         "config.user_config_5": {
-            "id": 170,
-            "type": "uint32",
-            "access": "rw"
+            "id": 151,
+            "type": "uint32"
         },
         "config.user_config_6": {
-            "id": 171,
-            "type": "uint32",
-            "access": "rw"
+            "id": 152,
+            "type": "uint32"
         },
         "config.user_config_7": {
-            "id": 172,
-            "type": "uint32",
-            "access": "rw"
+            "id": 153,
+            "type": "uint32"
         },
         "config.gpio0_mode": {
-            "id": 173,
-            "type": "uint8",
-            "access": "rw"
+            "id": 154,
+            "type": "uint8"
         },
         "config.gpio1_mode": {
-            "id": 174,
-            "type": "uint8",
-            "access": "rw"
+            "id": 155,
+            "type": "uint8"
         },
         "config.gpio2_mode": {
-            "id": 175,
-            "type": "uint8",
-            "access": "rw"
+            "id": 156,
+            "type": "uint8"
         },
         "config.gpio3_mode": {
-            "id": 176,
-            "type": "uint8",
-            "access": "rw"
+            "id": 157,
+            "type": "uint8"
         },
         "config.gpio4_mode": {
-            "id": 177,
-            "type": "uint8",
-            "access": "rw"
+            "id": 158,
+            "type": "uint8"
         },
         "config.gpio5_mode": {
-            "id": 178,
-            "type": "uint8",
-            "access": "rw"
+            "id": 159,
+            "type": "uint8"
         },
         "config.gpio6_mode": {
-            "id": 179,
-            "type": "uint8",
-            "access": "rw"
+            "id": 160,
+            "type": "uint8"
         },
         "config.gpio7_mode": {
-            "id": 180,
-            "type": "uint8",
-            "access": "rw"
+            "id": 161,
+            "type": "uint8"
         },
         "config.gpio8_mode": {
-            "id": 181,
-            "type": "uint8",
-            "access": "rw"
+            "id": 162,
+            "type": "uint8"
         },
         "config.gpio9_mode": {
-            "id": 182,
-            "type": "uint8",
-            "access": "rw"
+            "id": 163,
+            "type": "uint8"
         },
         "config.gpio10_mode": {
-            "id": 183,
-            "type": "uint8",
-            "access": "rw"
+            "id": 164,
+            "type": "uint8"
         },
         "config.gpio11_mode": {
-            "id": 184,
-            "type": "uint8",
-            "access": "rw"
+            "id": 165,
+            "type": "uint8"
         },
         "config.gpio12_mode": {
-            "id": 185,
-            "type": "uint8",
-            "access": "rw"
+            "id": 166,
+            "type": "uint8"
         },
         "config.gpio13_mode": {
-            "id": 186,
-            "type": "uint8",
-            "access": "rw"
+            "id": 167,
+            "type": "uint8"
         },
         "config.gpio14_mode": {
-            "id": 187,
-            "type": "uint8",
-            "access": "rw"
+            "id": 168,
+            "type": "uint8"
         },
         "config.gpio15_mode": {
-            "id": 188,
-            "type": "uint8",
-            "access": "rw"
+            "id": 169,
+            "type": "uint8"
         },
         "config.gpio16_mode": {
-            "id": 189,
-            "type": "uint8",
-            "access": "rw"
+            "id": 170,
+            "type": "uint8"
         },
         "config.gpio17_mode": {
-            "id": 190,
-            "type": "uint8",
-            "access": "rw"
+            "id": 171,
+            "type": "uint8"
         },
         "config.gpio18_mode": {
-            "id": 191,
-            "type": "uint8",
-            "access": "rw"
+            "id": 172,
+            "type": "uint8"
         },
         "config.gpio8_pwm_mapping.endpoint": {
-            "id": 192,
-            "type": "endpoint_ref",
-            "access": "rw"
+            "id": 173,
+            "type": "endpoint_ref"
         },
         "config.gpio8_pwm_mapping.min": {
-            "id": 193,
-            "type": "float",
-            "access": "rw"
+            "id": 174,
+            "type": "float"
         },
         "config.gpio8_pwm_mapping.max": {
-            "id": 194,
-            "type": "float",
-            "access": "rw"
+            "id": 175,
+            "type": "float"
         },
         "config.gpio9_pwm_mapping.endpoint": {
-            "id": 195,
-            "type": "endpoint_ref",
-            "access": "rw"
+            "id": 176,
+            "type": "endpoint_ref"
         },
         "config.gpio9_pwm_mapping.min": {
-            "id": 196,
-            "type": "float",
-            "access": "rw"
+            "id": 177,
+            "type": "float"
         },
         "config.gpio9_pwm_mapping.max": {
-            "id": 197,
-            "type": "float",
-            "access": "rw"
+            "id": 178,
+            "type": "float"
         },
         "config.gpio15_analog_mapping.endpoint": {
-            "id": 198,
-            "type": "endpoint_ref",
-            "access": "rw"
+            "id": 179,
+            "type": "endpoint_ref"
         },
         "config.gpio15_analog_mapping.min": {
-            "id": 199,
-            "type": "float",
-            "access": "rw"
+            "id": 180,
+            "type": "float"
         },
         "config.gpio15_analog_mapping.max": {
-            "id": 200,
-            "type": "float",
-            "access": "rw"
+            "id": 181,
+            "type": "float"
         },
         "config.gpio16_analog_mapping.endpoint": {
-            "id": 201,
-            "type": "endpoint_ref",
-            "access": "rw"
+            "id": 182,
+            "type": "endpoint_ref"
         },
         "config.gpio16_analog_mapping.min": {
-            "id": 202,
-            "type": "float",
-            "access": "rw"
+            "id": 183,
+            "type": "float"
         },
         "config.gpio16_analog_mapping.max": {
-            "id": 203,
-            "type": "float",
-            "access": "rw"
+            "id": 184,
+            "type": "float"
         },
         "config.inverter0.current_soft_max": {
-            "id": 204,
-            "type": "float",
-            "access": "rw"
+            "id": 185,
+            "type": "float"
         },
         "config.inverter0.current_hard_max": {
-            "id": 205,
-            "type": "float",
-            "access": "rw"
+            "id": 186,
+            "type": "float"
         },
         "config.inverter0.temp_limit_lower": {
-            "id": 206,
-            "type": "float",
-            "access": "rw"
+            "id": 187,
+            "type": "float"
         },
         "config.inverter0.temp_limit_upper": {
-            "id": 207,
-            "type": "float",
-            "access": "rw"
+            "id": 188,
+            "type": "float"
         },
         "config.inverter0.mod_magn_max": {
-            "id": 208,
-            "type": "float",
-            "access": "rw"
+            "id": 189,
+            "type": "float"
         },
         "config.inverter0.shunt_conductance": {
-            "id": 209,
-            "type": "float",
-            "access": "rw"
+            "id": 190,
+            "type": "float"
         },
         "config.inverter0.drv_config": {
-            "id": 210,
-            "type": "uint64",
-            "access": "rw"
+            "id": 191,
+            "type": "uint64"
         },
         "config.odrv_fan.upper": {
-            "id": 211,
-            "type": "float",
-            "access": "rw"
+            "id": 192,
+            "type": "float"
         },
         "config.odrv_fan.lower": {
-            "id": 212,
-            "type": "float",
-            "access": "rw"
+            "id": 193,
+            "type": "float"
         },
         "config.odrv_fan.enabled": {
-            "id": 213,
-            "type": "bool",
-            "access": "rw"
+            "id": 194,
+            "type": "bool"
         },
         "config.motor_fan.upper": {
-            "id": 214,
-            "type": "float",
-            "access": "rw"
+            "id": 195,
+            "type": "float"
         },
         "config.motor_fan.lower": {
-            "id": 215,
-            "type": "float",
-            "access": "rw"
+            "id": 196,
+            "type": "float"
         },
         "config.motor_fan.enabled": {
-            "id": 216,
-            "type": "bool",
-            "access": "rw"
+            "id": 197,
+            "type": "bool"
         },
         "axis0.active_errors": {
-            "id": 217,
-            "type": "uint32",
-            "access": "r"
+            "id": 198,
+            "type": "uint32"
         },
         "axis0.disarm_reason": {
-            "id": 218,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.detailed_disarm_reason": {
-            "id": 219,
-            "type": "uint32",
-            "access": "r"
+            "id": 199,
+            "type": "uint32"
         },
         "axis0.step_dir_active": {
-            "id": 220,
-            "type": "bool",
-            "access": "r"
+            "id": 200,
+            "type": "bool"
         },
         "axis0.last_drv_fault": {
-            "id": 221,
-            "type": "uint32",
-            "access": "r"
+            "id": 201,
+            "type": "uint32"
         },
         "axis0.steps": {
-            "id": 222,
-            "type": "int64",
-            "access": "r"
+            "id": 202,
+            "type": "int64"
         },
         "axis0.current_state": {
-            "id": 223,
-            "type": "uint8",
-            "access": "r"
+            "id": 203,
+            "type": "uint8"
         },
         "axis0.requested_state": {
-            "id": 224,
-            "type": "uint8",
-            "access": "rw"
+            "id": 204,
+            "type": "uint8"
         },
         "axis0.pos_estimate": {
-            "id": 225,
-            "type": "float",
-            "access": "rw"
+            "id": 205,
+            "type": "float"
         },
         "axis0.vel_estimate": {
-            "id": 226,
-            "type": "float",
-            "access": "r"
+            "id": 206,
+            "type": "float"
         },
         "axis0.is_homed": {
-            "id": 227,
-            "type": "bool",
-            "access": "rw"
+            "id": 207,
+            "type": "bool"
         },
         "axis0.config.startup_max_wait_for_ready": {
-            "id": 228,
-            "type": "float",
-            "access": "rw"
+            "id": 208,
+            "type": "float"
         },
         "axis0.config.startup_motor_calibration": {
-            "id": 229,
-            "type": "bool",
-            "access": "rw"
+            "id": 209,
+            "type": "bool"
         },
         "axis0.config.startup_encoder_index_search": {
-            "id": 230,
-            "type": "bool",
-            "access": "rw"
+            "id": 210,
+            "type": "bool"
         },
         "axis0.config.startup_encoder_offset_calibration": {
-            "id": 231,
-            "type": "bool",
-            "access": "rw"
+            "id": 211,
+            "type": "bool"
         },
         "axis0.config.startup_closed_loop_control": {
-            "id": 232,
-            "type": "bool",
-            "access": "rw"
+            "id": 212,
+            "type": "bool"
         },
         "axis0.config.startup_homing": {
-            "id": 233,
-            "type": "bool",
-            "access": "rw"
+            "id": 213,
+            "type": "bool"
         },
         "axis0.config.init_torque": {
-            "id": 234,
-            "type": "float",
-            "access": "rw"
+            "id": 214,
+            "type": "float"
         },
         "axis0.config.init_vel": {
-            "id": 235,
-            "type": "float",
-            "access": "rw"
+            "id": 215,
+            "type": "float"
         },
         "axis0.config.init_pos": {
-            "id": 236,
-            "type": "float",
-            "access": "rw"
+            "id": 216,
+            "type": "float"
         },
         "axis0.config.enable_step_dir": {
-            "id": 237,
-            "type": "bool",
-            "access": "rw"
+            "id": 217,
+            "type": "bool"
         },
         "axis0.config.step_dir_always_on": {
-            "id": 238,
-            "type": "bool",
-            "access": "rw"
+            "id": 218,
+            "type": "bool"
         },
         "axis0.config.calib_range": {
-            "id": 239,
-            "type": "float",
-            "access": "rw"
+            "id": 219,
+            "type": "float"
         },
         "axis0.config.calib_scan_distance": {
-            "id": 240,
-            "type": "float",
-            "access": "rw"
+            "id": 220,
+            "type": "float"
         },
         "axis0.config.calib_scan_vel": {
-            "id": 241,
-            "type": "float",
-            "access": "rw"
+            "id": 221,
+            "type": "float"
         },
         "axis0.config.index_search_at_target_vel_only": {
-            "id": 242,
-            "type": "bool",
-            "access": "rw"
+            "id": 222,
+            "type": "bool"
         },
         "axis0.config.watchdog_timeout": {
-            "id": 243,
-            "type": "float",
-            "access": "rw"
+            "id": 223,
+            "type": "float"
         },
         "axis0.config.enable_watchdog": {
-            "id": 244,
-            "type": "bool",
-            "access": "rw"
+            "id": 224,
+            "type": "bool"
         },
         "axis0.config.step_gpio_pin": {
-            "id": 245,
-            "type": "uint16",
-            "access": "rw"
+            "id": 225,
+            "type": "uint16"
         },
         "axis0.config.dir_gpio_pin": {
-            "id": 246,
-            "type": "uint16",
-            "access": "rw"
+            "id": 226,
+            "type": "uint16"
         },
         "axis0.config.error_gpio_pin": {
-            "id": 247,
-            "type": "uint16",
-            "access": "rw"
+            "id": 227,
+            "type": "uint16"
         },
         "axis0.config.enable_error_gpio": {
-            "id": 248,
-            "type": "bool",
-            "access": "rw"
+            "id": 228,
+            "type": "bool"
         },
         "axis0.config.calibration_lockin.current": {
-            "id": 249,
-            "type": "float",
-            "access": "rw"
+            "id": 229,
+            "type": "float"
         },
         "axis0.config.calibration_lockin.ramp_time": {
-            "id": 250,
-            "type": "float",
-            "access": "rw"
+            "id": 230,
+            "type": "float"
         },
         "axis0.config.calibration_lockin.ramp_distance": {
-            "id": 251,
-            "type": "float",
-            "access": "rw"
+            "id": 231,
+            "type": "float"
         },
         "axis0.config.calibration_lockin.accel": {
-            "id": 252,
-            "type": "float",
-            "access": "rw"
+            "id": 232,
+            "type": "float"
         },
         "axis0.config.calibration_lockin.vel": {
-            "id": 253,
-            "type": "float",
-            "access": "rw"
+            "id": 233,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.initial_pos": {
-            "id": 254,
-            "type": "float",
-            "access": "rw"
+            "id": 234,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.current": {
-            "id": 255,
-            "type": "float",
-            "access": "rw"
+            "id": 235,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.ramp_time": {
-            "id": 256,
-            "type": "float",
-            "access": "rw"
+            "id": 236,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.ramp_distance": {
-            "id": 257,
-            "type": "float",
-            "access": "rw"
+            "id": 237,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.accel": {
-            "id": 258,
-            "type": "float",
-            "access": "rw"
+            "id": 238,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.vel": {
-            "id": 259,
-            "type": "float",
-            "access": "rw"
+            "id": 239,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.finish_distance": {
-            "id": 260,
-            "type": "float",
-            "access": "rw"
+            "id": 240,
+            "type": "float"
         },
         "axis0.config.sensorless_ramp.finish_on_vel": {
-            "id": 261,
-            "type": "bool",
-            "access": "rw"
+            "id": 241,
+            "type": "bool"
         },
         "axis0.config.sensorless_ramp.finish_on_distance": {
-            "id": 262,
-            "type": "bool",
-            "access": "rw"
+            "id": 242,
+            "type": "bool"
         },
         "axis0.config.general_lockin.initial_pos": {
-            "id": 263,
-            "type": "float",
-            "access": "rw"
+            "id": 243,
+            "type": "float"
         },
         "axis0.config.general_lockin.current": {
-            "id": 264,
-            "type": "float",
-            "access": "rw"
+            "id": 244,
+            "type": "float"
         },
         "axis0.config.general_lockin.ramp_time": {
-            "id": 265,
-            "type": "float",
-            "access": "rw"
+            "id": 245,
+            "type": "float"
         },
         "axis0.config.general_lockin.ramp_distance": {
-            "id": 266,
-            "type": "float",
-            "access": "rw"
+            "id": 246,
+            "type": "float"
         },
         "axis0.config.general_lockin.accel": {
-            "id": 267,
-            "type": "float",
-            "access": "rw"
+            "id": 247,
+            "type": "float"
         },
         "axis0.config.general_lockin.vel": {
-            "id": 268,
-            "type": "float",
-            "access": "rw"
+            "id": 248,
+            "type": "float"
         },
         "axis0.config.general_lockin.finish_distance": {
-            "id": 269,
-            "type": "float",
-            "access": "rw"
+            "id": 249,
+            "type": "float"
         },
         "axis0.config.general_lockin.finish_on_vel": {
-            "id": 270,
-            "type": "bool",
-            "access": "rw"
+            "id": 250,
+            "type": "bool"
         },
         "axis0.config.general_lockin.finish_on_distance": {
-            "id": 271,
-            "type": "bool",
-            "access": "rw"
+            "id": 251,
+            "type": "bool"
         },
         "axis0.config.can.node_id": {
-            "id": 272,
-            "type": "uint32",
-            "access": "rw"
+            "id": 252,
+            "type": "uint32"
         },
         "axis0.config.can.version_msg_rate_ms": {
-            "id": 273,
-            "type": "uint32",
-            "access": "rw"
+            "id": 253,
+            "type": "uint32"
         },
         "axis0.config.can.heartbeat_msg_rate_ms": {
-            "id": 274,
-            "type": "uint32",
-            "access": "rw"
+            "id": 254,
+            "type": "uint32"
         },
         "axis0.config.can.encoder_msg_rate_ms": {
-            "id": 275,
-            "type": "uint32",
-            "access": "rw"
+            "id": 255,
+            "type": "uint32"
         },
         "axis0.config.can.iq_msg_rate_ms": {
-            "id": 276,
-            "type": "uint32",
-            "access": "rw"
+            "id": 256,
+            "type": "uint32"
         },
         "axis0.config.can.error_msg_rate_ms": {
-            "id": 277,
-            "type": "uint32",
-            "access": "rw"
+            "id": 257,
+            "type": "uint32"
         },
         "axis0.config.can.temperature_msg_rate_ms": {
-            "id": 278,
-            "type": "uint32",
-            "access": "rw"
+            "id": 258,
+            "type": "uint32"
         },
         "axis0.config.can.bus_voltage_msg_rate_ms": {
-            "id": 279,
-            "type": "uint32",
-            "access": "rw"
+            "id": 259,
+            "type": "uint32"
         },
         "axis0.config.can.torques_msg_rate_ms": {
-            "id": 280,
-            "type": "uint32",
-            "access": "rw"
+            "id": 260,
+            "type": "uint32"
         },
         "axis0.config.can.powers_msg_rate_ms": {
-            "id": 281,
-            "type": "uint32",
-            "access": "rw"
+            "id": 261,
+            "type": "uint32"
         },
         "axis0.config.can.input_vel_scale": {
-            "id": 282,
-            "type": "uint32",
-            "access": "rw"
+            "id": 262,
+            "type": "uint32"
         },
         "axis0.config.can.input_torque_scale": {
-            "id": 283,
-            "type": "uint32",
-            "access": "rw"
+            "id": 263,
+            "type": "uint32"
         },
         "axis0.config.load_encoder": {
-            "id": 284,
-            "type": "uint8",
-            "access": "rw"
+            "id": 264,
+            "type": "uint8"
         },
         "axis0.config.commutation_encoder": {
-            "id": 285,
-            "type": "uint8",
-            "access": "rw"
+            "id": 265,
+            "type": "uint8"
         },
         "axis0.config.encoder_bandwidth": {
-            "id": 286,
-            "type": "float",
-            "access": "rw"
+            "id": 266,
+            "type": "float"
         },
         "axis0.config.commutation_encoder_bandwidth": {
-            "id": 287,
-            "type": "float",
-            "access": "rw"
+            "id": 267,
+            "type": "float"
         },
         "axis0.config.I_bus_hard_min": {
-            "id": 288,
-            "type": "float",
-            "access": "rw"
+            "id": 268,
+            "type": "float"
         },
         "axis0.config.I_bus_hard_max": {
-            "id": 289,
-            "type": "float",
-            "access": "rw"
+            "id": 269,
+            "type": "float"
         },
         "axis0.config.I_bus_soft_min": {
-            "id": 290,
-            "type": "float",
-            "access": "rw"
+            "id": 270,
+            "type": "float"
         },
         "axis0.config.I_bus_soft_max": {
-            "id": 291,
-            "type": "float",
-            "access": "rw"
+            "id": 271,
+            "type": "float"
         },
         "axis0.config.P_bus_soft_min": {
-            "id": 292,
-            "type": "float",
-            "access": "rw"
+            "id": 272,
+            "type": "float"
         },
         "axis0.config.P_bus_soft_max": {
-            "id": 293,
-            "type": "float",
-            "access": "rw"
+            "id": 273,
+            "type": "float"
         },
         "axis0.config.torque_soft_min": {
-            "id": 294,
-            "type": "float",
-            "access": "rw"
+            "id": 274,
+            "type": "float"
         },
         "axis0.config.torque_soft_max": {
-            "id": 295,
-            "type": "float",
-            "access": "rw"
+            "id": 275,
+            "type": "float"
         },
         "axis0.config.motor.motor_type": {
-            "id": 296,
-            "type": "uint8",
-            "access": "rw"
+            "id": 276,
+            "type": "uint8"
         },
         "axis0.config.motor.pole_pairs": {
-            "id": 297,
-            "type": "uint32",
-            "access": "rw"
+            "id": 277,
+            "type": "uint32"
         },
         "axis0.config.motor.phase_resistance": {
-            "id": 298,
-            "type": "float",
-            "access": "rw"
+            "id": 278,
+            "type": "float"
         },
         "axis0.config.motor.phase_inductance": {
-            "id": 299,
-            "type": "float",
-            "access": "rw"
+            "id": 279,
+            "type": "float"
         },
         "axis0.config.motor.phase_resistance_valid": {
-            "id": 300,
-            "type": "bool",
-            "access": "rw"
+            "id": 280,
+            "type": "bool"
         },
         "axis0.config.motor.phase_inductance_valid": {
-            "id": 301,
-            "type": "bool",
-            "access": "rw"
+            "id": 281,
+            "type": "bool"
         },
         "axis0.config.motor.torque_constant": {
-            "id": 302,
-            "type": "float",
-            "access": "rw"
+            "id": 282,
+            "type": "float"
         },
         "axis0.config.motor.direction": {
-            "id": 303,
-            "type": "float",
-            "access": "rw"
+            "id": 283,
+            "type": "float"
         },
         "axis0.config.motor.current_control_bandwidth": {
-            "id": 304,
-            "type": "float",
-            "access": "rw"
+            "id": 284,
+            "type": "float"
         },
         "axis0.config.motor.wL_FF_enable": {
-            "id": 305,
-            "type": "bool",
-            "access": "rw"
+            "id": 285,
+            "type": "bool"
         },
         "axis0.config.motor.bEMF_FF_enable": {
-            "id": 306,
-            "type": "bool",
-            "access": "rw"
-        },
-        "axis0.config.motor.dI_dt_FF_enable": {
-            "id": 307,
-            "type": "bool",
-            "access": "rw"
+            "id": 286,
+            "type": "bool"
         },
         "axis0.config.motor.ff_pm_flux_linkage": {
-            "id": 308,
-            "type": "float",
-            "access": "rw"
+            "id": 287,
+            "type": "float"
         },
         "axis0.config.motor.ff_pm_flux_linkage_valid": {
-            "id": 309,
-            "type": "bool",
-            "access": "rw"
+            "id": 288,
+            "type": "bool"
         },
         "axis0.config.motor.motor_model_l_d": {
-            "id": 310,
-            "type": "float",
-            "access": "rw"
+            "id": 289,
+            "type": "float"
         },
         "axis0.config.motor.motor_model_l_q": {
-            "id": 311,
-            "type": "float",
-            "access": "rw"
+            "id": 290,
+            "type": "float"
         },
         "axis0.config.motor.motor_model_l_dq_valid": {
-            "id": 312,
-            "type": "bool",
-            "access": "rw"
+            "id": 291,
+            "type": "bool"
         },
         "axis0.config.motor.calibration_current": {
-            "id": 313,
-            "type": "float",
-            "access": "rw"
+            "id": 292,
+            "type": "float"
         },
         "axis0.config.motor.resistance_calib_max_voltage": {
-            "id": 314,
-            "type": "float",
-            "access": "rw"
+            "id": 293,
+            "type": "float"
         },
         "axis0.config.motor.current_soft_max": {
-            "id": 315,
-            "type": "float",
-            "access": "rw"
+            "id": 294,
+            "type": "float"
         },
         "axis0.config.motor.current_hard_max": {
-            "id": 316,
-            "type": "float",
-            "access": "rw"
+            "id": 295,
+            "type": "float"
         },
         "axis0.config.motor.current_slew_rate_limit": {
-            "id": 317,
-            "type": "float",
-            "access": "rw"
+            "id": 296,
+            "type": "float"
         },
         "axis0.config.motor.fw_enable": {
-            "id": 318,
-            "type": "bool",
-            "access": "rw"
+            "id": 297,
+            "type": "bool"
         },
         "axis0.config.motor.fw_mod_setpoint": {
-            "id": 319,
-            "type": "float",
-            "access": "rw"
+            "id": 298,
+            "type": "float"
         },
         "axis0.config.motor.fw_fb_bandwidth": {
-            "id": 320,
-            "type": "float",
-            "access": "rw"
+            "id": 299,
+            "type": "float"
         },
         "axis0.config.motor.acim_gain_min_flux": {
-            "id": 321,
-            "type": "float",
-            "access": "rw"
+            "id": 300,
+            "type": "float"
         },
         "axis0.config.motor.acim_autoflux_enable": {
-            "id": 322,
-            "type": "bool",
-            "access": "rw"
+            "id": 301,
+            "type": "bool"
         },
         "axis0.config.motor.acim_autoflux_min_Id": {
-            "id": 323,
-            "type": "float",
-            "access": "rw"
+            "id": 302,
+            "type": "float"
         },
         "axis0.config.motor.acim_autoflux_attack_gain": {
-            "id": 324,
-            "type": "float",
-            "access": "rw"
+            "id": 303,
+            "type": "float"
         },
         "axis0.config.motor.acim_autoflux_decay_gain": {
-            "id": 325,
-            "type": "float",
-            "access": "rw"
+            "id": 304,
+            "type": "float"
         },
         "axis0.config.motor.acim_nominal_slip_vel": {
-            "id": 326,
-            "type": "float",
-            "access": "rw"
+            "id": 305,
+            "type": "float"
         },
         "axis0.config.motor.sensorless_observer_gain": {
-            "id": 327,
-            "type": "float",
-            "access": "rw"
+            "id": 306,
+            "type": "float"
         },
         "axis0.config.motor.sensorless_pll_bandwidth": {
-            "id": 328,
-            "type": "float",
-            "access": "rw"
+            "id": 307,
+            "type": "float"
         },
         "axis0.config.motor.sensorless_pm_flux_linkage": {
-            "id": 329,
-            "type": "float",
-            "access": "rw"
+            "id": 308,
+            "type": "float"
         },
         "axis0.config.motor.sensorless_pm_flux_linkage_valid": {
-            "id": 330,
-            "type": "bool",
-            "access": "rw"
+            "id": 309,
+            "type": "bool"
         },
         "axis0.config.motor.power_torque_report_filter_bandwidth": {
-            "id": 331,
-            "type": "float",
-            "access": "rw"
+            "id": 310,
+            "type": "float"
         },
         "axis0.config.anticogging.enabled": {
-            "id": 332,
-            "type": "bool",
-            "access": "rw"
+            "id": 311,
+            "type": "bool"
         },
         "axis0.config.anticogging.max_torque": {
-            "id": 333,
-            "type": "float",
-            "access": "rw"
+            "id": 312,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_start_vel": {
-            "id": 334,
-            "type": "float",
-            "access": "rw"
+            "id": 313,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_end_vel": {
-            "id": 335,
-            "type": "float",
-            "access": "rw"
+            "id": 314,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_coarse_tuning_duration": {
-            "id": 336,
-            "type": "float",
-            "access": "rw"
+            "id": 315,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_fine_tuning_duration": {
-            "id": 337,
-            "type": "float",
-            "access": "rw"
+            "id": 316,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_fine_dist_scale": {
-            "id": 338,
-            "type": "float",
-            "access": "rw"
+            "id": 317,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_coarse_integrator_gain": {
-            "id": 339,
-            "type": "float",
-            "access": "rw"
+            "id": 318,
+            "type": "float"
         },
         "axis0.config.anticogging.calib_bidirectional": {
-            "id": 340,
-            "type": "bool",
-            "access": "rw"
+            "id": 319,
+            "type": "bool"
         },
         "axis0.config.anticogging.set_map": {
-            "id": 341,
+            "id": 320,
             "type": "function",
             "inputs": [
                 {
@@ -1697,7 +1325,7 @@
             "outputs": []
         },
         "axis0.config.anticogging.get_map": {
-            "id": 344,
+            "id": 323,
             "type": "function",
             "inputs": [
                 {
@@ -1712,318 +1340,448 @@
                 }
             ]
         },
-        "axis0.config.off_axis_k": {
+        "axis0.motor.alpha_beta_controller.current_meas_phA": {
+            "id": 326,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.current_meas_phB": {
+            "id": 327,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.current_meas_phC": {
+            "id": 328,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.current_meas_status_phA": {
+            "id": 329,
+            "type": "uint32"
+        },
+        "axis0.motor.alpha_beta_controller.current_meas_status_phB": {
+            "id": 330,
+            "type": "uint32"
+        },
+        "axis0.motor.alpha_beta_controller.current_meas_status_phC": {
+            "id": 331,
+            "type": "uint32"
+        },
+        "axis0.motor.alpha_beta_controller.I_bus": {
+            "id": 332,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.Ialpha_measured": {
+            "id": 333,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.Ibeta_measured": {
+            "id": 334,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.max_measurable_current": {
+            "id": 335,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.power": {
+            "id": 336,
+            "type": "float"
+        },
+        "axis0.motor.alpha_beta_controller.n_evt_current_measurement": {
+            "id": 337,
+            "type": "uint32"
+        },
+        "axis0.motor.alpha_beta_controller.n_evt_pwm_update": {
+            "id": 338,
+            "type": "uint32"
+        },
+        "axis0.motor.foc.p_gain": {
+            "id": 339,
+            "type": "float"
+        },
+        "axis0.motor.foc.i_gain": {
+            "id": 340,
+            "type": "float"
+        },
+        "axis0.motor.foc.I_measured_report_filter_k": {
+            "id": 341,
+            "type": "float"
+        },
+        "axis0.motor.foc.Id_setpoint": {
+            "id": 342,
+            "type": "float"
+        },
+        "axis0.motor.foc.Iq_setpoint": {
+            "id": 343,
+            "type": "float"
+        },
+        "axis0.motor.foc.Vd_setpoint": {
+            "id": 344,
+            "type": "float"
+        },
+        "axis0.motor.foc.Vq_setpoint": {
+            "id": 345,
+            "type": "float"
+        },
+        "axis0.motor.foc.phase": {
+            "id": 346,
+            "type": "float"
+        },
+        "axis0.motor.foc.phase_vel": {
             "id": 347,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.off_axis_k_commutation": {
+        "axis0.motor.foc.Id_measured": {
             "id": 348,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.calib_vel": {
+        "axis0.motor.foc.Iq_measured": {
             "id": 349,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.calib_settling_delay": {
+        "axis0.motor.foc.v_current_control_integral_d": {
             "id": 350,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.calib_turns": {
+        "axis0.motor.foc.v_current_control_integral_q": {
             "id": 351,
-            "type": "uint32",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.cosx_coef": {
+        "axis0.motor.foc.mod_d": {
             "id": 352,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.sinx_coef": {
+        "axis0.motor.foc.mod_q": {
             "id": 353,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.cos2x_coef": {
+        "axis0.motor.foc.final_v_alpha": {
             "id": 354,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation.sin2x_coef": {
+        "axis0.motor.foc.final_v_beta": {
             "id": 355,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.calib_vel": {
+        "axis0.motor.fet_thermistor.temperature": {
             "id": 356,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.calib_settling_delay": {
+        "axis0.motor.motor_thermistor.temperature": {
             "id": 357,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.calib_turns": {
+        "axis0.motor.motor_thermistor.config.gpio_pin": {
             "id": 358,
-            "type": "uint32",
-            "access": "rw"
+            "type": "uint16"
         },
-        "axis0.config.harmonic_compensation_commutation.cosx_coef": {
+        "axis0.motor.motor_thermistor.config.r_ref": {
             "id": 359,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.sinx_coef": {
+        "axis0.motor.motor_thermistor.config.t_ref": {
             "id": 360,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.cos2x_coef": {
+        "axis0.motor.motor_thermistor.config.beta": {
             "id": 361,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
         },
-        "axis0.config.harmonic_compensation_commutation.sin2x_coef": {
+        "axis0.motor.motor_thermistor.config.temp_limit_lower": {
             "id": 362,
-            "type": "float",
-            "access": "rw"
+            "type": "float"
+        },
+        "axis0.motor.motor_thermistor.config.temp_limit_upper": {
+            "id": 363,
+            "type": "float"
+        },
+        "axis0.motor.motor_thermistor.config.enabled": {
+            "id": 364,
+            "type": "bool"
+        },
+        "axis0.motor.acim_estimator.rotor_flux": {
+            "id": 365,
+            "type": "float"
+        },
+        "axis0.motor.acim_estimator.slip_vel": {
+            "id": 366,
+            "type": "float"
+        },
+        "axis0.motor.acim_estimator.phase_offset": {
+            "id": 367,
+            "type": "float"
+        },
+        "axis0.motor.acim_estimator.stator_phase_vel": {
+            "id": 368,
+            "type": "float"
+        },
+        "axis0.motor.acim_estimator.stator_phase": {
+            "id": 369,
+            "type": "float"
+        },
+        "axis0.motor.sensorless_estimator.phase": {
+            "id": 370,
+            "type": "float"
+        },
+        "axis0.motor.sensorless_estimator.pll_pos": {
+            "id": 371,
+            "type": "float"
+        },
+        "axis0.motor.sensorless_estimator.phase_vel": {
+            "id": 372,
+            "type": "float"
+        },
+        "axis0.motor.torque_estimate": {
+            "id": 373,
+            "type": "float"
+        },
+        "axis0.motor.mechanical_power": {
+            "id": 374,
+            "type": "float"
+        },
+        "axis0.motor.electrical_power": {
+            "id": 375,
+            "type": "float"
+        },
+        "axis0.motor.loss_power": {
+            "id": 376,
+            "type": "float"
+        },
+        "axis0.motor.effective_current_lim": {
+            "id": 377,
+            "type": "float"
+        },
+        "axis0.motor.resistance_calibration_I_beta": {
+            "id": 378,
+            "type": "float"
+        },
+        "axis0.motor.input_id": {
+            "id": 379,
+            "type": "float"
+        },
+        "axis0.motor.input_iq": {
+            "id": 380,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.a_0": {
+            "id": 381,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.b_0": {
+            "id": 382,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.c_0": {
+            "id": 383,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.a_1": {
+            "id": 384,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.b_1": {
+            "id": 385,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.c_1": {
+            "id": 386,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.a_2": {
+            "id": 387,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.b_2": {
+            "id": 388,
+            "type": "float"
+        },
+        "axis0.motor.dc_calib.c_2": {
+            "id": 389,
+            "type": "float"
         },
         "axis0.controller.input_pos": {
-            "id": 363,
-            "type": "float",
-            "access": "rw"
+            "id": 390,
+            "type": "float"
         },
         "axis0.controller.input_vel": {
-            "id": 364,
-            "type": "float",
-            "access": "rw"
+            "id": 391,
+            "type": "float"
         },
         "axis0.controller.input_torque": {
-            "id": 365,
-            "type": "float",
-            "access": "rw"
+            "id": 392,
+            "type": "float"
         },
         "axis0.controller.pos_setpoint": {
-            "id": 366,
-            "type": "float",
-            "access": "r"
+            "id": 393,
+            "type": "float"
         },
         "axis0.controller.vel_setpoint": {
-            "id": 367,
-            "type": "float",
-            "access": "r"
+            "id": 394,
+            "type": "float"
         },
         "axis0.controller.torque_setpoint": {
-            "id": 368,
-            "type": "float",
-            "access": "r"
+            "id": 395,
+            "type": "float"
         },
         "axis0.controller.effective_torque_setpoint": {
-            "id": 369,
-            "type": "float",
-            "access": "r"
+            "id": 396,
+            "type": "float"
         },
         "axis0.controller.trajectory_done": {
-            "id": 370,
-            "type": "bool",
-            "access": "r"
+            "id": 397,
+            "type": "bool"
         },
         "axis0.controller.vel_integrator_torque": {
-            "id": 371,
-            "type": "float",
-            "access": "rw"
+            "id": 398,
+            "type": "float"
         },
         "axis0.controller.autotuning_phase": {
-            "id": 372,
-            "type": "float",
-            "access": "rw"
+            "id": 399,
+            "type": "float"
         },
         "axis0.controller.config.enable_vel_limit": {
-            "id": 373,
-            "type": "bool",
-            "access": "rw"
+            "id": 400,
+            "type": "bool"
         },
         "axis0.controller.config.enable_torque_mode_vel_limit": {
-            "id": 374,
-            "type": "bool",
-            "access": "rw"
+            "id": 401,
+            "type": "bool"
         },
         "axis0.controller.config.enable_gain_scheduling": {
-            "id": 375,
-            "type": "bool",
-            "access": "rw"
+            "id": 402,
+            "type": "bool"
         },
         "axis0.controller.config.gain_scheduling_width": {
-            "id": 376,
-            "type": "float",
-            "access": "rw"
+            "id": 403,
+            "type": "float"
         },
         "axis0.controller.config.enable_overspeed_error": {
-            "id": 377,
-            "type": "bool",
-            "access": "rw"
+            "id": 404,
+            "type": "bool"
         },
         "axis0.controller.config.control_mode": {
-            "id": 378,
-            "type": "uint8",
-            "access": "rw"
+            "id": 405,
+            "type": "uint8"
         },
         "axis0.controller.config.input_mode": {
-            "id": 379,
-            "type": "uint8",
-            "access": "rw"
+            "id": 406,
+            "type": "uint8"
         },
         "axis0.controller.config.pos_gain": {
-            "id": 380,
-            "type": "float",
-            "access": "rw"
+            "id": 407,
+            "type": "float"
         },
         "axis0.controller.config.vel_gain": {
-            "id": 381,
-            "type": "float",
-            "access": "rw"
+            "id": 408,
+            "type": "float"
         },
         "axis0.controller.config.vel_integrator_gain": {
-            "id": 382,
-            "type": "float",
-            "access": "rw"
+            "id": 409,
+            "type": "float"
         },
         "axis0.controller.config.vel_integrator_limit": {
-            "id": 383,
-            "type": "float",
-            "access": "rw"
+            "id": 410,
+            "type": "float"
         },
         "axis0.controller.config.vel_limit": {
-            "id": 384,
-            "type": "float",
-            "access": "rw"
+            "id": 411,
+            "type": "float"
         },
         "axis0.controller.config.vel_limit_tolerance": {
-            "id": 385,
-            "type": "float",
-            "access": "rw"
+            "id": 412,
+            "type": "float"
         },
         "axis0.controller.config.vel_ramp_rate": {
-            "id": 386,
-            "type": "float",
-            "access": "rw"
+            "id": 413,
+            "type": "float"
         },
         "axis0.controller.config.torque_ramp_rate": {
-            "id": 387,
-            "type": "float",
-            "access": "rw"
+            "id": 414,
+            "type": "float"
         },
         "axis0.controller.config.circular_setpoints": {
-            "id": 388,
-            "type": "bool",
-            "access": "rw"
+            "id": 415,
+            "type": "bool"
         },
         "axis0.controller.config.circular_setpoint_range": {
-            "id": 389,
-            "type": "float",
-            "access": "rw"
+            "id": 416,
+            "type": "float"
         },
         "axis0.controller.config.absolute_setpoints": {
-            "id": 390,
-            "type": "bool",
-            "access": "rw"
+            "id": 417,
+            "type": "bool"
         },
         "axis0.controller.config.use_commutation_vel": {
-            "id": 391,
-            "type": "bool",
-            "access": "rw"
+            "id": 418,
+            "type": "bool"
         },
         "axis0.controller.config.use_load_encoder_for_commutation_vel": {
-            "id": 392,
-            "type": "bool",
-            "access": "rw"
+            "id": 419,
+            "type": "bool"
         },
         "axis0.controller.config.commutation_vel_scale": {
-            "id": 393,
-            "type": "float",
-            "access": "rw"
+            "id": 420,
+            "type": "float"
         },
         "axis0.controller.config.steps_per_circular_range": {
-            "id": 394,
-            "type": "int32",
-            "access": "rw"
+            "id": 421,
+            "type": "int32"
         },
         "axis0.controller.config.homing_speed": {
-            "id": 395,
-            "type": "float",
-            "access": "rw"
+            "id": 422,
+            "type": "float"
         },
         "axis0.controller.config.inertia": {
-            "id": 396,
-            "type": "float",
-            "access": "rw"
+            "id": 423,
+            "type": "float"
         },
         "axis0.controller.config.input_filter_bandwidth": {
-            "id": 397,
-            "type": "float",
-            "access": "rw"
+            "id": 424,
+            "type": "float"
         },
         "axis0.controller.config.spinout_mechanical_power_bandwidth": {
-            "id": 398,
-            "type": "float",
-            "access": "rw"
+            "id": 425,
+            "type": "float"
         },
         "axis0.controller.config.spinout_electrical_power_bandwidth": {
-            "id": 399,
-            "type": "float",
-            "access": "rw"
+            "id": 426,
+            "type": "float"
         },
         "axis0.controller.config.spinout_mechanical_power_threshold": {
-            "id": 400,
-            "type": "float",
-            "access": "rw"
+            "id": 427,
+            "type": "float"
         },
         "axis0.controller.config.spinout_electrical_power_threshold": {
-            "id": 401,
-            "type": "float",
-            "access": "rw"
+            "id": 428,
+            "type": "float"
         },
         "axis0.controller.autotuning.frequency": {
-            "id": 402,
-            "type": "float",
-            "access": "rw"
+            "id": 429,
+            "type": "float"
         },
         "axis0.controller.autotuning.pos_amplitude": {
-            "id": 403,
-            "type": "float",
-            "access": "rw"
+            "id": 430,
+            "type": "float"
         },
         "axis0.controller.autotuning.vel_amplitude": {
-            "id": 404,
-            "type": "float",
-            "access": "rw"
+            "id": 431,
+            "type": "float"
         },
         "axis0.controller.autotuning.torque_amplitude": {
-            "id": 405,
-            "type": "float",
-            "access": "rw"
+            "id": 432,
+            "type": "float"
         },
         "axis0.controller.autotuning.vel_burst_factor": {
-            "id": 406,
-            "type": "uint8",
-            "access": "rw"
+            "id": 433,
+            "type": "uint8"
         },
         "axis0.controller.spinout_mechanical_power": {
-            "id": 407,
-            "type": "float",
-            "access": "r"
+            "id": 434,
+            "type": "float"
         },
         "axis0.controller.spinout_electrical_power": {
-            "id": 408,
-            "type": "float",
-            "access": "r"
+            "id": 435,
+            "type": "float"
         },
         "axis0.controller.move_incremental": {
-            "id": 409,
+            "id": 436,
             "type": "function",
             "inputs": [
                 {
@@ -2038,229 +1796,187 @@
             "outputs": []
         },
         "axis0.trap_traj.config.vel_limit": {
-            "id": 412,
-            "type": "float",
-            "access": "rw"
+            "id": 439,
+            "type": "float"
         },
         "axis0.trap_traj.config.accel_limit": {
-            "id": 413,
-            "type": "float",
-            "access": "rw"
+            "id": 440,
+            "type": "float"
         },
         "axis0.trap_traj.config.decel_limit": {
-            "id": 414,
-            "type": "float",
-            "access": "rw"
+            "id": 441,
+            "type": "float"
         },
         "axis0.min_endstop.state": {
-            "id": 415,
-            "type": "bool",
-            "access": "r"
+            "id": 442,
+            "type": "bool"
         },
         "axis0.min_endstop.config.gpio_num": {
-            "id": 416,
-            "type": "uint16",
-            "access": "rw"
+            "id": 443,
+            "type": "uint16"
         },
         "axis0.min_endstop.config.enabled": {
-            "id": 417,
-            "type": "bool",
-            "access": "rw"
+            "id": 444,
+            "type": "bool"
         },
         "axis0.min_endstop.config.offset": {
-            "id": 418,
-            "type": "float",
-            "access": "rw"
+            "id": 445,
+            "type": "float"
         },
         "axis0.min_endstop.config.is_active_high": {
-            "id": 419,
-            "type": "bool",
-            "access": "rw"
+            "id": 446,
+            "type": "bool"
         },
         "axis0.min_endstop.config.debounce_ms": {
-            "id": 420,
-            "type": "uint32",
-            "access": "rw"
+            "id": 447,
+            "type": "uint32"
         },
         "axis0.max_endstop.state": {
-            "id": 421,
-            "type": "bool",
-            "access": "r"
+            "id": 448,
+            "type": "bool"
         },
         "axis0.max_endstop.config.gpio_num": {
-            "id": 422,
-            "type": "uint16",
-            "access": "rw"
+            "id": 449,
+            "type": "uint16"
         },
         "axis0.max_endstop.config.enabled": {
-            "id": 423,
-            "type": "bool",
-            "access": "rw"
+            "id": 450,
+            "type": "bool"
         },
         "axis0.max_endstop.config.offset": {
-            "id": 424,
-            "type": "float",
-            "access": "rw"
+            "id": 451,
+            "type": "float"
         },
         "axis0.max_endstop.config.is_active_high": {
-            "id": 425,
-            "type": "bool",
-            "access": "rw"
+            "id": 452,
+            "type": "bool"
         },
         "axis0.max_endstop.config.debounce_ms": {
-            "id": 426,
-            "type": "uint32",
-            "access": "rw"
+            "id": 453,
+            "type": "uint32"
         },
         "axis0.enable_pin.state": {
-            "id": 427,
-            "type": "bool",
-            "access": "r"
+            "id": 454,
+            "type": "bool"
         },
         "axis0.enable_pin.config.gpio_num": {
-            "id": 428,
-            "type": "uint16",
-            "access": "rw"
+            "id": 455,
+            "type": "uint16"
         },
         "axis0.enable_pin.config.enabled": {
-            "id": 429,
-            "type": "bool",
-            "access": "rw"
+            "id": 456,
+            "type": "bool"
         },
         "axis0.enable_pin.config.offset": {
-            "id": 430,
-            "type": "float",
-            "access": "rw"
+            "id": 457,
+            "type": "float"
         },
         "axis0.enable_pin.config.is_active_high": {
-            "id": 431,
-            "type": "bool",
-            "access": "rw"
+            "id": 458,
+            "type": "bool"
         },
         "axis0.enable_pin.config.debounce_ms": {
-            "id": 432,
-            "type": "uint32",
-            "access": "rw"
+            "id": 459,
+            "type": "uint32"
         },
         "axis0.mechanical_brake.config.gpio_num": {
-            "id": 433,
-            "type": "uint16",
-            "access": "rw"
+            "id": 460,
+            "type": "uint16"
         },
         "axis0.mechanical_brake.config.is_active_low": {
-            "id": 434,
-            "type": "bool",
-            "access": "rw"
+            "id": 461,
+            "type": "bool"
         },
         "axis0.mechanical_brake.engage": {
-            "id": 435,
+            "id": 462,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "axis0.mechanical_brake.release": {
-            "id": 436,
+            "id": 463,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "axis0.pos_vel_mapper.status": {
-            "id": 437,
-            "type": "uint8",
-            "access": "r"
+            "id": 464,
+            "type": "uint8"
         },
         "axis0.pos_vel_mapper.pos_rel": {
-            "id": 438,
-            "type": "float",
-            "access": "r"
+            "id": 465,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.pos_abs": {
-            "id": 439,
-            "type": "float",
-            "access": "r"
+            "id": 466,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.vel": {
-            "id": 440,
-            "type": "float",
-            "access": "r"
+            "id": 467,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.working_offset": {
-            "id": 441,
-            "type": "float",
-            "access": "r"
+            "id": 468,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.n_index_events": {
-            "id": 442,
-            "type": "uint32",
-            "access": "rw"
+            "id": 469,
+            "type": "uint32"
         },
         "axis0.pos_vel_mapper.config.circular": {
-            "id": 443,
-            "type": "bool",
-            "access": "rw"
+            "id": 470,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.circular_output_range": {
-            "id": 444,
-            "type": "float",
-            "access": "rw"
+            "id": 471,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.config.scale": {
-            "id": 445,
-            "type": "float",
-            "access": "rw"
+            "id": 472,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.config.offset_valid": {
-            "id": 446,
-            "type": "bool",
-            "access": "rw"
+            "id": 473,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.offset": {
-            "id": 447,
-            "type": "float",
-            "access": "rw"
+            "id": 474,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.config.approx_init_pos_valid": {
-            "id": 448,
-            "type": "bool",
-            "access": "rw"
+            "id": 475,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.approx_init_pos": {
-            "id": 449,
-            "type": "float",
-            "access": "rw"
+            "id": 476,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.config.index_offset_valid": {
-            "id": 450,
-            "type": "bool",
-            "access": "rw"
+            "id": 477,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.index_offset": {
-            "id": 451,
-            "type": "float",
-            "access": "rw"
+            "id": 478,
+            "type": "float"
         },
         "axis0.pos_vel_mapper.config.use_index_gpio": {
-            "id": 452,
-            "type": "bool",
-            "access": "rw"
+            "id": 479,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.passive_index_search": {
-            "id": 453,
-            "type": "bool",
-            "access": "rw"
+            "id": 480,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.config.index_gpio": {
-            "id": 454,
-            "type": "uint8",
-            "access": "rw"
+            "id": 481,
+            "type": "uint8"
         },
         "axis0.pos_vel_mapper.config.use_endstop": {
-            "id": 455,
-            "type": "bool",
-            "access": "rw"
+            "id": 482,
+            "type": "bool"
         },
         "axis0.pos_vel_mapper.set_abs_pos": {
-            "id": 456,
+            "id": 483,
             "type": "function",
             "inputs": [
                 {
@@ -2276,102 +1992,83 @@
             ]
         },
         "axis0.commutation_mapper.status": {
-            "id": 459,
-            "type": "uint8",
-            "access": "r"
+            "id": 486,
+            "type": "uint8"
         },
         "axis0.commutation_mapper.pos_rel": {
-            "id": 460,
-            "type": "float",
-            "access": "r"
+            "id": 487,
+            "type": "float"
         },
         "axis0.commutation_mapper.pos_abs": {
-            "id": 461,
-            "type": "float",
-            "access": "r"
+            "id": 488,
+            "type": "float"
         },
         "axis0.commutation_mapper.vel": {
-            "id": 462,
-            "type": "float",
-            "access": "r"
+            "id": 489,
+            "type": "float"
         },
         "axis0.commutation_mapper.working_offset": {
-            "id": 463,
-            "type": "float",
-            "access": "r"
+            "id": 490,
+            "type": "float"
         },
         "axis0.commutation_mapper.n_index_events": {
-            "id": 464,
-            "type": "uint32",
-            "access": "rw"
+            "id": 491,
+            "type": "uint32"
         },
         "axis0.commutation_mapper.config.circular": {
-            "id": 465,
-            "type": "bool",
-            "access": "rw"
+            "id": 492,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.circular_output_range": {
-            "id": 466,
-            "type": "float",
-            "access": "rw"
+            "id": 493,
+            "type": "float"
         },
         "axis0.commutation_mapper.config.scale": {
-            "id": 467,
-            "type": "float",
-            "access": "rw"
+            "id": 494,
+            "type": "float"
         },
         "axis0.commutation_mapper.config.offset_valid": {
-            "id": 468,
-            "type": "bool",
-            "access": "rw"
+            "id": 495,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.offset": {
-            "id": 469,
-            "type": "float",
-            "access": "rw"
+            "id": 496,
+            "type": "float"
         },
         "axis0.commutation_mapper.config.approx_init_pos_valid": {
-            "id": 470,
-            "type": "bool",
-            "access": "rw"
+            "id": 497,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.approx_init_pos": {
-            "id": 471,
-            "type": "float",
-            "access": "rw"
+            "id": 498,
+            "type": "float"
         },
         "axis0.commutation_mapper.config.index_offset_valid": {
-            "id": 472,
-            "type": "bool",
-            "access": "rw"
+            "id": 499,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.index_offset": {
-            "id": 473,
-            "type": "float",
-            "access": "rw"
+            "id": 500,
+            "type": "float"
         },
         "axis0.commutation_mapper.config.use_index_gpio": {
-            "id": 474,
-            "type": "bool",
-            "access": "rw"
+            "id": 501,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.passive_index_search": {
-            "id": 475,
-            "type": "bool",
-            "access": "rw"
+            "id": 502,
+            "type": "bool"
         },
         "axis0.commutation_mapper.config.index_gpio": {
-            "id": 476,
-            "type": "uint8",
-            "access": "rw"
+            "id": 503,
+            "type": "uint8"
         },
         "axis0.commutation_mapper.config.use_endstop": {
-            "id": 477,
-            "type": "bool",
-            "access": "rw"
+            "id": 504,
+            "type": "bool"
         },
         "axis0.commutation_mapper.set_abs_pos": {
-            "id": 478,
+            "id": 505,
             "type": "function",
             "inputs": [
                 {
@@ -2387,623 +2084,217 @@
             ]
         },
         "axis0.interpolator.status": {
-            "id": 481,
-            "type": "uint8",
-            "access": "r"
+            "id": 508,
+            "type": "uint8"
         },
         "axis0.interpolator.interpolation": {
-            "id": 482,
-            "type": "float",
-            "access": "r"
+            "id": 509,
+            "type": "float"
         },
         "axis0.interpolator.config.dynamic": {
-            "id": 483,
-            "type": "bool",
-            "access": "rw"
+            "id": 510,
+            "type": "bool"
         },
         "axis0.task_times.thermistor_update.start_time": {
-            "id": 484,
-            "type": "uint32",
-            "access": "r"
+            "id": 511,
+            "type": "uint32"
         },
         "axis0.task_times.thermistor_update.end_time": {
-            "id": 485,
-            "type": "uint32",
-            "access": "r"
+            "id": 512,
+            "type": "uint32"
         },
         "axis0.task_times.thermistor_update.length": {
-            "id": 486,
-            "type": "uint32",
-            "access": "r"
+            "id": 513,
+            "type": "uint32"
         },
         "axis0.task_times.thermistor_update.max_length": {
-            "id": 487,
-            "type": "uint32",
-            "access": "rw"
+            "id": 514,
+            "type": "uint32"
         },
         "axis0.task_times.sensorless_estimator_update.start_time": {
-            "id": 488,
-            "type": "uint32",
-            "access": "r"
+            "id": 515,
+            "type": "uint32"
         },
         "axis0.task_times.sensorless_estimator_update.end_time": {
-            "id": 489,
-            "type": "uint32",
-            "access": "r"
+            "id": 516,
+            "type": "uint32"
         },
         "axis0.task_times.sensorless_estimator_update.length": {
-            "id": 490,
-            "type": "uint32",
-            "access": "r"
+            "id": 517,
+            "type": "uint32"
         },
         "axis0.task_times.sensorless_estimator_update.max_length": {
-            "id": 491,
-            "type": "uint32",
-            "access": "rw"
+            "id": 518,
+            "type": "uint32"
         },
         "axis0.task_times.endstop_update.start_time": {
-            "id": 492,
-            "type": "uint32",
-            "access": "r"
+            "id": 519,
+            "type": "uint32"
         },
         "axis0.task_times.endstop_update.end_time": {
-            "id": 493,
-            "type": "uint32",
-            "access": "r"
+            "id": 520,
+            "type": "uint32"
         },
         "axis0.task_times.endstop_update.length": {
-            "id": 494,
-            "type": "uint32",
-            "access": "r"
+            "id": 521,
+            "type": "uint32"
         },
         "axis0.task_times.endstop_update.max_length": {
-            "id": 495,
-            "type": "uint32",
-            "access": "rw"
+            "id": 522,
+            "type": "uint32"
         },
         "axis0.task_times.can_heartbeat.start_time": {
-            "id": 496,
-            "type": "uint32",
-            "access": "r"
+            "id": 523,
+            "type": "uint32"
         },
         "axis0.task_times.can_heartbeat.end_time": {
-            "id": 497,
-            "type": "uint32",
-            "access": "r"
+            "id": 524,
+            "type": "uint32"
         },
         "axis0.task_times.can_heartbeat.length": {
-            "id": 498,
-            "type": "uint32",
-            "access": "r"
+            "id": 525,
+            "type": "uint32"
         },
         "axis0.task_times.can_heartbeat.max_length": {
-            "id": 499,
-            "type": "uint32",
-            "access": "rw"
+            "id": 526,
+            "type": "uint32"
         },
         "axis0.task_times.controller_update.start_time": {
-            "id": 500,
-            "type": "uint32",
-            "access": "r"
+            "id": 527,
+            "type": "uint32"
         },
         "axis0.task_times.controller_update.end_time": {
-            "id": 501,
-            "type": "uint32",
-            "access": "r"
+            "id": 528,
+            "type": "uint32"
         },
         "axis0.task_times.controller_update.length": {
-            "id": 502,
-            "type": "uint32",
-            "access": "r"
+            "id": 529,
+            "type": "uint32"
         },
         "axis0.task_times.controller_update.max_length": {
-            "id": 503,
-            "type": "uint32",
-            "access": "rw"
+            "id": 530,
+            "type": "uint32"
         },
         "axis0.task_times.open_loop_vector_generator_update.start_time": {
-            "id": 504,
-            "type": "uint32",
-            "access": "r"
+            "id": 531,
+            "type": "uint32"
         },
         "axis0.task_times.open_loop_vector_generator_update.end_time": {
-            "id": 505,
-            "type": "uint32",
-            "access": "r"
+            "id": 532,
+            "type": "uint32"
         },
         "axis0.task_times.open_loop_vector_generator_update.length": {
-            "id": 506,
-            "type": "uint32",
-            "access": "r"
+            "id": 533,
+            "type": "uint32"
         },
         "axis0.task_times.open_loop_vector_generator_update.max_length": {
-            "id": 507,
-            "type": "uint32",
-            "access": "rw"
+            "id": 534,
+            "type": "uint32"
         },
         "axis0.task_times.acim_estimator_update.start_time": {
-            "id": 508,
-            "type": "uint32",
-            "access": "r"
+            "id": 535,
+            "type": "uint32"
         },
         "axis0.task_times.acim_estimator_update.end_time": {
-            "id": 509,
-            "type": "uint32",
-            "access": "r"
+            "id": 536,
+            "type": "uint32"
         },
         "axis0.task_times.acim_estimator_update.length": {
-            "id": 510,
-            "type": "uint32",
-            "access": "r"
+            "id": 537,
+            "type": "uint32"
         },
         "axis0.task_times.acim_estimator_update.max_length": {
-            "id": 511,
-            "type": "uint32",
-            "access": "rw"
+            "id": 538,
+            "type": "uint32"
         },
         "axis0.task_times.motor_update.start_time": {
-            "id": 512,
-            "type": "uint32",
-            "access": "r"
+            "id": 539,
+            "type": "uint32"
         },
         "axis0.task_times.motor_update.end_time": {
-            "id": 513,
-            "type": "uint32",
-            "access": "r"
+            "id": 540,
+            "type": "uint32"
         },
         "axis0.task_times.motor_update.length": {
-            "id": 514,
-            "type": "uint32",
-            "access": "r"
+            "id": 541,
+            "type": "uint32"
         },
         "axis0.task_times.motor_update.max_length": {
-            "id": 515,
-            "type": "uint32",
-            "access": "rw"
+            "id": 542,
+            "type": "uint32"
         },
         "axis0.task_times.current_controller_update.start_time": {
-            "id": 516,
-            "type": "uint32",
-            "access": "r"
+            "id": 543,
+            "type": "uint32"
         },
         "axis0.task_times.current_controller_update.end_time": {
-            "id": 517,
-            "type": "uint32",
-            "access": "r"
+            "id": 544,
+            "type": "uint32"
         },
         "axis0.task_times.current_controller_update.length": {
-            "id": 518,
-            "type": "uint32",
-            "access": "r"
+            "id": 545,
+            "type": "uint32"
         },
         "axis0.task_times.current_controller_update.max_length": {
-            "id": 519,
-            "type": "uint32",
-            "access": "rw"
+            "id": 546,
+            "type": "uint32"
         },
         "axis0.task_times.current_sense.start_time": {
-            "id": 520,
-            "type": "uint32",
-            "access": "r"
+            "id": 547,
+            "type": "uint32"
         },
         "axis0.task_times.current_sense.end_time": {
-            "id": 521,
-            "type": "uint32",
-            "access": "r"
+            "id": 548,
+            "type": "uint32"
         },
         "axis0.task_times.current_sense.length": {
-            "id": 522,
-            "type": "uint32",
-            "access": "r"
+            "id": 549,
+            "type": "uint32"
         },
         "axis0.task_times.current_sense.max_length": {
-            "id": 523,
-            "type": "uint32",
-            "access": "rw"
+            "id": 550,
+            "type": "uint32"
         },
         "axis0.task_times.pwm_update.start_time": {
-            "id": 524,
-            "type": "uint32",
-            "access": "r"
+            "id": 551,
+            "type": "uint32"
         },
         "axis0.task_times.pwm_update.end_time": {
-            "id": 525,
-            "type": "uint32",
-            "access": "r"
+            "id": 552,
+            "type": "uint32"
         },
         "axis0.task_times.pwm_update.length": {
-            "id": 526,
-            "type": "uint32",
-            "access": "r"
+            "id": 553,
+            "type": "uint32"
         },
         "axis0.task_times.pwm_update.max_length": {
-            "id": 527,
-            "type": "uint32",
-            "access": "rw"
+            "id": 554,
+            "type": "uint32"
         },
         "axis0.procedure_result": {
-            "id": 528,
-            "type": "uint8",
-            "access": "r"
+            "id": 555,
+            "type": "uint8"
         },
         "axis0.disarm_time": {
-            "id": 529,
-            "type": "float",
-            "access": "rw"
+            "id": 556,
+            "type": "float"
         },
         "axis0.is_armed": {
-            "id": 530,
-            "type": "bool",
-            "access": "r"
+            "id": 557,
+            "type": "bool"
         },
         "axis0.observed_encoder_scale_factor": {
-            "id": 531,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_phA": {
-            "id": 532,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_phB": {
-            "id": 533,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_phC": {
-            "id": 534,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_status_phA": {
-            "id": 535,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_status_phB": {
-            "id": 536,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.current_meas_status_phC": {
-            "id": 537,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.I_bus": {
-            "id": 538,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.Ialpha_measured": {
-            "id": 539,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.Ibeta_measured": {
-            "id": 540,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.max_measurable_current": {
-            "id": 541,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.power": {
-            "id": 542,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.n_evt_current_measurement": {
-            "id": 543,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.motor.alpha_beta_controller.n_evt_pwm_update": {
-            "id": 544,
-            "type": "uint32",
-            "access": "r"
-        },
-        "axis0.motor.foc.p_gain": {
-            "id": 545,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.i_gain": {
-            "id": 546,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.I_measured_report_filter_k": {
-            "id": 547,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.foc.Id_setpoint": {
-            "id": 548,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Iq_setpoint": {
-            "id": 549,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Vd_setpoint": {
-            "id": 550,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Vq_setpoint": {
-            "id": 551,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.phase": {
-            "id": 552,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.phase_vel": {
-            "id": 553,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Id_measured": {
-            "id": 554,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Iq_measured": {
-            "id": 555,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.v_current_control_integral_d": {
-            "id": 556,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.foc.v_current_control_integral_q": {
-            "id": 557,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.foc.mod_d": {
             "id": 558,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.mod_q": {
-            "id": 559,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.mod_magn_sqr": {
-            "id": 560,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.final_v_alpha": {
-            "id": 561,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.final_v_beta": {
-            "id": 562,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Ierr_d": {
-            "id": 563,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Ierr_q": {
-            "id": 564,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.foc.Ierr_magn_sqr": {
-            "id": 565,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.fet_thermistor.temperature": {
-            "id": 566,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.acim_estimator.rotor_flux": {
-            "id": 567,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.acim_estimator.slip_vel": {
-            "id": 568,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.acim_estimator.phase_offset": {
-            "id": 569,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.acim_estimator.stator_phase_vel": {
-            "id": 570,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.acim_estimator.stator_phase": {
-            "id": 571,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.sensorless_estimator.phase": {
-            "id": 572,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.sensorless_estimator.pll_pos": {
-            "id": 573,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.sensorless_estimator.phase_vel": {
-            "id": 574,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.torque_estimate": {
-            "id": 575,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.mechanical_power": {
-            "id": 576,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.electrical_power": {
-            "id": 577,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.loss_power": {
-            "id": 578,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.effective_current_lim": {
-            "id": 579,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.resistance_calibration_I_beta": {
-            "id": 580,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.input_id": {
-            "id": 581,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.input_iq": {
-            "id": 582,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.a_0": {
-            "id": 583,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.b_0": {
-            "id": 584,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.c_0": {
-            "id": 585,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.a_1": {
-            "id": 586,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.b_1": {
-            "id": 587,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.c_1": {
-            "id": 588,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.a_2": {
-            "id": 589,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.b_2": {
-            "id": 590,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.dc_calib.c_2": {
-            "id": 591,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.temperature": {
-            "id": 592,
-            "type": "float",
-            "access": "r"
-        },
-        "axis0.motor.motor_thermistor.config.gpio_pin": {
-            "id": 593,
-            "type": "uint16",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.mode": {
-            "id": 594,
-            "type": "uint8",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.r_ref": {
-            "id": 595,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.t_ref": {
-            "id": 596,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.beta": {
-            "id": 597,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.a": {
-            "id": 598,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.b": {
-            "id": 599,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.temp_limit_lower": {
-            "id": 600,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.temp_limit_upper": {
-            "id": 601,
-            "type": "float",
-            "access": "rw"
-        },
-        "axis0.motor.motor_thermistor.config.enabled": {
-            "id": 602,
-            "type": "bool",
-            "access": "rw"
+            "type": "float"
         },
         "axis0.watchdog_feed": {
-            "id": 603,
+            "id": 559,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "axis0.set_abs_pos": {
-            "id": 604,
+            "id": 560,
             "type": "function",
             "inputs": [
                 {
@@ -3019,17 +2310,15 @@
             ]
         },
         "onboard_encoder0.status": {
-            "id": 607,
-            "type": "uint8",
-            "access": "r"
+            "id": 563,
+            "type": "uint8"
         },
         "onboard_encoder0.raw": {
-            "id": 608,
-            "type": "float",
-            "access": "r"
+            "id": 564,
+            "type": "float"
         },
         "onboard_encoder0.get_field_strength": {
-            "id": 609,
+            "id": 565,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3040,357 +2329,267 @@
             ]
         },
         "rs485_encoder_group0.status": {
-            "id": 611,
-            "type": "uint8",
-            "access": "r"
+            "id": 567,
+            "type": "uint8"
         },
         "rs485_encoder_group0.raw": {
-            "id": 612,
-            "type": "float",
-            "access": "r"
+            "id": 568,
+            "type": "float"
         },
         "rs485_encoder_group0.raw32": {
-            "id": 613,
-            "type": "uint32",
-            "access": "r"
+            "id": 569,
+            "type": "uint32"
         },
         "rs485_encoder_group0.config.mode": {
-            "id": 614,
-            "type": "uint8",
-            "access": "rw"
+            "id": 570,
+            "type": "uint8"
         },
         "rs485_encoder_group1.status": {
-            "id": 615,
-            "type": "uint8",
-            "access": "r"
+            "id": 571,
+            "type": "uint8"
         },
         "rs485_encoder_group1.raw": {
-            "id": 616,
-            "type": "float",
-            "access": "r"
+            "id": 572,
+            "type": "float"
         },
         "rs485_encoder_group1.raw32": {
-            "id": 617,
-            "type": "uint32",
-            "access": "r"
+            "id": 573,
+            "type": "uint32"
         },
         "rs485_encoder_group1.config.mode": {
-            "id": 618,
-            "type": "uint8",
-            "access": "rw"
+            "id": 574,
+            "type": "uint8"
         },
         "inc_encoder0.status": {
-            "id": 619,
-            "type": "uint8",
-            "access": "r"
+            "id": 575,
+            "type": "uint8"
         },
         "inc_encoder0.pos_min": {
-            "id": 620,
-            "type": "float",
-            "access": "r"
+            "id": 576,
+            "type": "float"
         },
         "inc_encoder0.pos_max": {
-            "id": 621,
-            "type": "float",
-            "access": "r"
+            "id": 577,
+            "type": "float"
         },
         "inc_encoder0.pos_residual": {
-            "id": 622,
-            "type": "float",
-            "access": "r"
+            "id": 578,
+            "type": "float"
         },
         "inc_encoder0.raw": {
-            "id": 623,
-            "type": "uint16",
-            "access": "r"
-        },
-        "inc_encoder0.raw_wrapped": {
-            "id": 624,
-            "type": "int32",
-            "access": "r"
+            "id": 579,
+            "type": "uint16"
         },
         "inc_encoder0.config.enabled": {
-            "id": 625,
-            "type": "bool",
-            "access": "rw"
-        },
-        "inc_encoder0.config.filter": {
-            "id": 626,
-            "type": "uint8",
-            "access": "rw"
+            "id": 580,
+            "type": "bool"
         },
         "inc_encoder0.config.cpr": {
-            "id": 627,
-            "type": "uint32",
-            "access": "rw"
+            "id": 581,
+            "type": "uint32"
         },
         "inc_encoder1.status": {
-            "id": 628,
-            "type": "uint8",
-            "access": "r"
+            "id": 582,
+            "type": "uint8"
         },
         "inc_encoder1.pos_min": {
-            "id": 629,
-            "type": "float",
-            "access": "r"
+            "id": 583,
+            "type": "float"
         },
         "inc_encoder1.pos_max": {
-            "id": 630,
-            "type": "float",
-            "access": "r"
+            "id": 584,
+            "type": "float"
         },
         "inc_encoder1.pos_residual": {
-            "id": 631,
-            "type": "float",
-            "access": "r"
+            "id": 585,
+            "type": "float"
         },
         "inc_encoder1.raw": {
-            "id": 632,
-            "type": "uint16",
-            "access": "r"
-        },
-        "inc_encoder1.raw_wrapped": {
-            "id": 633,
-            "type": "int32",
-            "access": "r"
+            "id": 586,
+            "type": "uint16"
         },
         "inc_encoder1.config.enabled": {
-            "id": 634,
-            "type": "bool",
-            "access": "rw"
-        },
-        "inc_encoder1.config.filter": {
-            "id": 635,
-            "type": "uint8",
-            "access": "rw"
+            "id": 587,
+            "type": "bool"
         },
         "inc_encoder1.config.cpr": {
-            "id": 636,
-            "type": "uint32",
-            "access": "rw"
+            "id": 588,
+            "type": "uint32"
         },
         "hall_encoder0.status": {
-            "id": 637,
-            "type": "uint8",
-            "access": "r"
+            "id": 589,
+            "type": "uint8"
         },
         "hall_encoder0.hall_cnt": {
-            "id": 638,
-            "type": "uint8",
-            "access": "r"
+            "id": 590,
+            "type": "uint8"
         },
         "hall_encoder0.raw_hall_state": {
-            "id": 639,
-            "type": "uint8",
-            "access": "r"
+            "id": 591,
+            "type": "uint8"
         },
         "hall_encoder0.abs_pos_min": {
-            "id": 640,
-            "type": "float",
-            "access": "r"
+            "id": 592,
+            "type": "float"
         },
         "hall_encoder0.abs_pos_max": {
-            "id": 641,
-            "type": "float",
-            "access": "r"
+            "id": 593,
+            "type": "float"
         },
         "hall_encoder0.config.enabled": {
-            "id": 642,
-            "type": "bool",
-            "access": "rw"
+            "id": 594,
+            "type": "bool"
         },
         "hall_encoder0.config.hall_polarity": {
-            "id": 643,
-            "type": "uint8",
-            "access": "rw"
+            "id": 595,
+            "type": "uint8"
         },
         "hall_encoder0.config.hall_polarity_calibrated": {
-            "id": 644,
-            "type": "bool",
-            "access": "rw"
+            "id": 596,
+            "type": "bool"
         },
         "hall_encoder0.config.ignore_illegal_hall_state": {
-            "id": 645,
-            "type": "bool",
-            "access": "rw"
+            "id": 597,
+            "type": "bool"
         },
         "hall_encoder0.config.edges_calibrated": {
-            "id": 646,
-            "type": "bool",
-            "access": "rw"
+            "id": 598,
+            "type": "bool"
         },
         "hall_encoder0.config.edge0": {
-            "id": 647,
-            "type": "float",
-            "access": "rw"
+            "id": 599,
+            "type": "float"
         },
         "hall_encoder0.config.edge1": {
-            "id": 648,
-            "type": "float",
-            "access": "rw"
+            "id": 600,
+            "type": "float"
         },
         "hall_encoder0.config.edge2": {
-            "id": 649,
-            "type": "float",
-            "access": "rw"
+            "id": 601,
+            "type": "float"
         },
         "hall_encoder0.config.edge3": {
-            "id": 650,
-            "type": "float",
-            "access": "rw"
+            "id": 602,
+            "type": "float"
         },
         "hall_encoder0.config.edge4": {
-            "id": 651,
-            "type": "float",
-            "access": "rw"
+            "id": 603,
+            "type": "float"
         },
         "hall_encoder0.config.edge5": {
-            "id": 652,
-            "type": "float",
-            "access": "rw"
+            "id": 604,
+            "type": "float"
         },
         "hall_encoder1.status": {
-            "id": 653,
-            "type": "uint8",
-            "access": "r"
+            "id": 605,
+            "type": "uint8"
         },
         "hall_encoder1.hall_cnt": {
-            "id": 654,
-            "type": "uint8",
-            "access": "r"
+            "id": 606,
+            "type": "uint8"
         },
         "hall_encoder1.raw_hall_state": {
-            "id": 655,
-            "type": "uint8",
-            "access": "r"
+            "id": 607,
+            "type": "uint8"
         },
         "hall_encoder1.abs_pos_min": {
-            "id": 656,
-            "type": "float",
-            "access": "r"
+            "id": 608,
+            "type": "float"
         },
         "hall_encoder1.abs_pos_max": {
-            "id": 657,
-            "type": "float",
-            "access": "r"
+            "id": 609,
+            "type": "float"
         },
         "hall_encoder1.config.enabled": {
-            "id": 658,
-            "type": "bool",
-            "access": "rw"
+            "id": 610,
+            "type": "bool"
         },
         "hall_encoder1.config.hall_polarity": {
-            "id": 659,
-            "type": "uint8",
-            "access": "rw"
+            "id": 611,
+            "type": "uint8"
         },
         "hall_encoder1.config.hall_polarity_calibrated": {
-            "id": 660,
-            "type": "bool",
-            "access": "rw"
+            "id": 612,
+            "type": "bool"
         },
         "hall_encoder1.config.ignore_illegal_hall_state": {
-            "id": 661,
-            "type": "bool",
-            "access": "rw"
+            "id": 613,
+            "type": "bool"
         },
         "hall_encoder1.config.edges_calibrated": {
-            "id": 662,
-            "type": "bool",
-            "access": "rw"
+            "id": 614,
+            "type": "bool"
         },
         "hall_encoder1.config.edge0": {
-            "id": 663,
-            "type": "float",
-            "access": "rw"
+            "id": 615,
+            "type": "float"
         },
         "hall_encoder1.config.edge1": {
-            "id": 664,
-            "type": "float",
-            "access": "rw"
+            "id": 616,
+            "type": "float"
         },
         "hall_encoder1.config.edge2": {
-            "id": 665,
-            "type": "float",
-            "access": "rw"
+            "id": 617,
+            "type": "float"
         },
         "hall_encoder1.config.edge3": {
-            "id": 666,
-            "type": "float",
-            "access": "rw"
+            "id": 618,
+            "type": "float"
         },
         "hall_encoder1.config.edge4": {
-            "id": 667,
-            "type": "float",
-            "access": "rw"
+            "id": 619,
+            "type": "float"
         },
         "hall_encoder1.config.edge5": {
-            "id": 668,
-            "type": "float",
-            "access": "rw"
+            "id": 620,
+            "type": "float"
         },
         "spi_encoder0.status": {
-            "id": 669,
-            "type": "uint8",
-            "access": "r"
+            "id": 621,
+            "type": "uint8"
         },
         "spi_encoder0.raw": {
-            "id": 670,
-            "type": "float",
-            "access": "r"
+            "id": 622,
+            "type": "float"
         },
         "spi_encoder0.warning": {
-            "id": 671,
-            "type": "bool",
-            "access": "r"
+            "id": 623,
+            "type": "bool"
         },
         "spi_encoder0.n_errors": {
-            "id": 672,
-            "type": "uint32",
-            "access": "r"
+            "id": 624,
+            "type": "uint32"
         },
         "spi_encoder0.inject_errors": {
-            "id": 673,
-            "type": "bool",
-            "access": "rw"
+            "id": 625,
+            "type": "bool"
         },
         "spi_encoder0.config.ncs_gpio": {
-            "id": 674,
-            "type": "uint8",
-            "access": "rw"
+            "id": 626,
+            "type": "uint8"
         },
         "spi_encoder0.config.mode": {
-            "id": 675,
-            "type": "uint8",
-            "access": "rw"
+            "id": 627,
+            "type": "uint8"
         },
         "spi_encoder0.config.delay": {
-            "id": 676,
-            "type": "float",
-            "access": "rw"
+            "id": 628,
+            "type": "float"
         },
         "spi_encoder0.config.max_error_rate": {
-            "id": 677,
-            "type": "float",
-            "access": "rw"
+            "id": 629,
+            "type": "float"
         },
         "spi_encoder0.config.baudrate": {
-            "id": 678,
-            "type": "uint32",
-            "access": "rw"
+            "id": 630,
+            "type": "uint32"
         },
         "spi_encoder0.config.biss_c_bits": {
-            "id": 679,
-            "type": "uint8",
-            "access": "rw"
-        },
-        "spi_encoder0.config.biss_c_multiturn_bits": {
-            "id": 680,
-            "type": "uint8",
-            "access": "rw"
+            "id": 631,
+            "type": "uint8"
         },
         "spi_encoder0.get_field_strength": {
-            "id": 681,
+            "id": 632,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3401,67 +2600,51 @@
             ]
         },
         "spi_encoder1.status": {
-            "id": 683,
-            "type": "uint8",
-            "access": "r"
+            "id": 634,
+            "type": "uint8"
         },
         "spi_encoder1.raw": {
-            "id": 684,
-            "type": "float",
-            "access": "r"
+            "id": 635,
+            "type": "float"
         },
         "spi_encoder1.warning": {
-            "id": 685,
-            "type": "bool",
-            "access": "r"
+            "id": 636,
+            "type": "bool"
         },
         "spi_encoder1.n_errors": {
-            "id": 686,
-            "type": "uint32",
-            "access": "r"
+            "id": 637,
+            "type": "uint32"
         },
         "spi_encoder1.inject_errors": {
-            "id": 687,
-            "type": "bool",
-            "access": "rw"
+            "id": 638,
+            "type": "bool"
         },
         "spi_encoder1.config.ncs_gpio": {
-            "id": 688,
-            "type": "uint8",
-            "access": "rw"
+            "id": 639,
+            "type": "uint8"
         },
         "spi_encoder1.config.mode": {
-            "id": 689,
-            "type": "uint8",
-            "access": "rw"
+            "id": 640,
+            "type": "uint8"
         },
         "spi_encoder1.config.delay": {
-            "id": 690,
-            "type": "float",
-            "access": "rw"
+            "id": 641,
+            "type": "float"
         },
         "spi_encoder1.config.max_error_rate": {
-            "id": 691,
-            "type": "float",
-            "access": "rw"
+            "id": 642,
+            "type": "float"
         },
         "spi_encoder1.config.baudrate": {
-            "id": 692,
-            "type": "uint32",
-            "access": "rw"
+            "id": 643,
+            "type": "uint32"
         },
         "spi_encoder1.config.biss_c_bits": {
-            "id": 693,
-            "type": "uint8",
-            "access": "rw"
-        },
-        "spi_encoder1.config.biss_c_multiturn_bits": {
-            "id": 694,
-            "type": "uint8",
-            "access": "rw"
+            "id": 644,
+            "type": "uint8"
         },
         "spi_encoder1.get_field_strength": {
-            "id": 695,
+            "id": 645,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3472,42 +2655,35 @@
             ]
         },
         "encoder_estimator0.status": {
-            "id": 697,
-            "type": "uint8",
-            "access": "r"
+            "id": 647,
+            "type": "uint8"
         },
         "encoder_estimator0.pos_estimate": {
-            "id": 698,
-            "type": "float",
-            "access": "r"
+            "id": 648,
+            "type": "float"
         },
         "encoder_estimator0.vel_estimate": {
-            "id": 699,
-            "type": "float",
-            "access": "r"
+            "id": 649,
+            "type": "float"
         },
         "encoder_estimator1.status": {
-            "id": 700,
-            "type": "uint8",
-            "access": "r"
+            "id": 650,
+            "type": "uint8"
         },
         "encoder_estimator1.pos_estimate": {
-            "id": 701,
-            "type": "float",
-            "access": "r"
+            "id": 651,
+            "type": "float"
         },
         "encoder_estimator1.vel_estimate": {
-            "id": 702,
-            "type": "float",
-            "access": "r"
+            "id": 652,
+            "type": "float"
         },
         "thermistor0": {
-            "id": 703,
-            "type": "float",
-            "access": "r"
+            "id": 653,
+            "type": "float"
         },
         "test_function": {
-            "id": 704,
+            "id": 654,
             "type": "function",
             "inputs": [
                 {
@@ -3523,7 +2699,7 @@
             ]
         },
         "get_adc_voltage": {
-            "id": 707,
+            "id": 657,
             "type": "function",
             "inputs": [
                 {
@@ -3539,7 +2715,7 @@
             ]
         },
         "save_configuration": {
-            "id": 710,
+            "id": 660,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3550,25 +2726,25 @@
             ]
         },
         "erase_configuration": {
-            "id": 712,
+            "id": 662,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "reboot": {
-            "id": 713,
+            "id": 663,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "enter_dfu_mode": {
-            "id": 714,
+            "id": 664,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "enter_dfu_mode2": {
-            "id": 715,
+            "id": 665,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3579,7 +2755,7 @@
             ]
         },
         "disable_bootloader": {
-            "id": 717,
+            "id": 667,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3589,14 +2765,8 @@
                 }
             ]
         },
-        "identify_once": {
-            "id": 719,
-            "type": "function",
-            "inputs": [],
-            "outputs": []
-        },
         "get_interrupt_status": {
-            "id": 720,
+            "id": 669,
             "type": "function",
             "inputs": [
                 {
@@ -3612,7 +2782,7 @@
             ]
         },
         "get_dma_status": {
-            "id": 723,
+            "id": 672,
             "type": "function",
             "inputs": [
                 {
@@ -3628,7 +2798,7 @@
             ]
         },
         "get_gpio_states": {
-            "id": 726,
+            "id": 675,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3639,7 +2809,7 @@
             ]
         },
         "set_gpio": {
-            "id": 728,
+            "id": 677,
             "type": "function",
             "inputs": [
                 {
@@ -3659,7 +2829,7 @@
             ]
         },
         "get_drv_fault": {
-            "id": 732,
+            "id": 681,
             "type": "function",
             "inputs": [],
             "outputs": [
@@ -3670,13 +2840,13 @@
             ]
         },
         "clear_errors": {
-            "id": 734,
+            "id": 683,
             "type": "function",
             "inputs": [],
             "outputs": []
         },
         "get_raw_8": {
-            "id": 735,
+            "id": 684,
             "type": "function",
             "inputs": [
                 {
@@ -3692,7 +2862,7 @@
             ]
         },
         "get_raw": {
-            "id": 738,
+            "id": 687,
             "type": "function",
             "inputs": [
                 {
@@ -3708,7 +2878,7 @@
             ]
         },
         "get_raw_32": {
-            "id": 741,
+            "id": 690,
             "type": "function",
             "inputs": [
                 {
@@ -3724,7 +2894,7 @@
             ]
         },
         "get_raw_256": {
-            "id": 744,
+            "id": 693,
             "type": "function",
             "inputs": [
                 {
