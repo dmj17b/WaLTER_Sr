@@ -14,6 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/WheelCommands.msg"
+  "msg/WheelVels.msg"
 )
 
 if(BUILD_TESTING)
