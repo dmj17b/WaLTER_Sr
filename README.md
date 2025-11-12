@@ -74,6 +74,7 @@ To ensure that this node is working properly, you can run ```ros2 run joy joy_no
     - If VS code is not already attempting to connect, click on the "Remote Explorer" icon on the left side of the VSCode window. This should show a list of devices to connect to.
         - Click on strideboom
     - You may need to reload the window a few times before it asks for a password. The password to ssh into the pi is "password"
+    - Alternatively, if you only plan on running tests, or if VSCode is acting up, you can run ```ssh pi@strideboom``` to connect in a standard terminal window
 
 ## Starting the Test
 
