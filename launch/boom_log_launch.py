@@ -82,4 +82,5 @@ def generate_launch_description():
         wheels,
         joy_node,
         main_ctrl_node,
+        ros_bagger,
     ])

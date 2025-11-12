@@ -7,13 +7,13 @@ from std_msgs.msg import Float32
 from interfaces.msg import BoomWheelCmds
 
 # Define GPIO pins for motor control
-M1_P_PIN = 12  # PWM pin for Motor 1
-M1_A_PIN = 16  # Direction pin A for Motor 1
-M1_B_PIN = 18  # Direction pin B for Motor 1
+M1_P_PIN = 27  # PWM pin for Motor 1
+M1_A_PIN = 26  # Direction pin A for Motor 1
+M1_B_PIN = 17  # Direction pin B for Motor 1
 
-M2_P_PIN = 32  # PWM pin for Motor 2
-M2_A_PIN = 36  # Direction pin A for Motor 2
-M2_B_PIN = 38  # Direction pin B for Motor 2
+M2_P_PIN = 23  # PWM pin for Motor 2
+M2_A_PIN = 24  # Direction pin A for Motor 2
+M2_B_PIN = 22  # Direction pin B for Motor 2
 
 class PIWheelCtrl(Node):
     def __init__(self):

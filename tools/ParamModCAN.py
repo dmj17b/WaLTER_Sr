@@ -142,6 +142,7 @@ for motor in [knee,hip]:
 
     ''' Check CAN communication rates'''
     print(f"Node ID: {motor.node_id}")
+    print(f"Undervoltage Trip Level: {motor.read('config.dc_bus_undervoltage_trip_level')}")
     print(f"Version MSG Rate: {motor.read('axis0.config.can.version_msg_rate_ms')}")
     print(f"Heartbeat Rate: {motor.read('axis0.config.can.heartbeat_msg_rate_ms')}")
     print(f"Encoder msg rate: {motor.read('axis0.config.can.encoder_msg_rate_ms')}")

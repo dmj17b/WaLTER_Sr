@@ -7,7 +7,7 @@ class BrushedMotor:
         self.b_pin = int(B_pin)
 
         self.duty_tol = 5
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.a_pin, GPIO.OUT)
         GPIO.setup(self.b_pin, GPIO.OUT)
         GPIO.setup(self.p_pin, GPIO.OUT)
