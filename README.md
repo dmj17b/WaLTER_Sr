@@ -75,6 +75,8 @@ To ensure that this node is working properly, you can run ```ros2 run joy joy_no
         - Click on strideboom
     - You may need to reload the window a few times before it asks for a password. The password to ssh into the pi is "password"
 
+## Starting the Test
+
 5. Once the VSCode window is ssh'd into the Raspberry Pi, navigate to "repository/WaLTER_Sr"
 
 6. Source the terminal environment to ensure that all of the ros topics and nodes are understood by the terminal window when using commands
@@ -93,6 +95,8 @@ To ensure that this node is working properly, you can run ```ros2 run joy joy_no
     - D-Pad Up/Down: Hip
 
 10. To shutdown the test and stop logging, press ctrl-c in the terminal. This should shut down all nodes, stop logging, and send the motors into an idle state
+
+## Data Extraction
 
 11. Data Extraction - If you ran the log launch file, a rosbag folder stamped with the time and date of the test should appear in main repository folder
     - To convert this data to csv files, run the following (without <> brackets):
