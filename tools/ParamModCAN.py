@@ -136,6 +136,9 @@ hip = ODriveModifier(node_id=1, channel="can0")
 
 
 
+
+
+
 ''' Update Knee Parameters'''
 for motor in [knee,hip]:
     motor.check_version()  # Check ODrive version
@@ -166,6 +169,15 @@ for motor in [knee,hip]:
     print(f"Inertia value: {motor.read('axis0.controller.config.inertia')}")
     motor.pos = motor.read('axis0.pos_vel_mapper.pos_rel')
     print(f"Motor Position: {motor.pos}")
+
+    print(f"********** GAINS **********")
+    # "axis0.controller.config.pos_gain"
+    # "axis0.controller.config.vel_gain"
+    # "axis0.controller.config.vel_integrator_gain"
+    print(f"Position Gain: {motor.read('axis0.controller.config.pos_gain')}")
+    print(f"Velocity Gain: {motor.read('axis0.controller.config.vel_gain')}")
+    print(f"Velocity Integral Gain: {motor.read('axis0.controller.config.vel_integrator_gain')}")
+
     print("\n")
 
     ''' Change communication rates'''  
@@ -184,7 +196,6 @@ for motor in [knee,hip]:
     motor.write('axis0.controller.config.spinout_mechanical_power_threshold', -50)
     motor.write('axis0.controller.config.inertia', 0.0)  # Set inertia value
     motor.write('axis0.pos_vel_mapper.config.offset', motor.pos)  # Set position relative to 0
-    # motor.write('axis0.commutation_mapper.config.offset', 0.0)  # Set index offset to 0
 
     # Save configuration to flash memory
     motor.save_config()
